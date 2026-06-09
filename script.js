@@ -163,7 +163,10 @@
     const next = TESTSETS[(idx + direction + TESTSETS.length) % TESTSETS.length];
     if(next === currentTestset) return;
     currentTestset = next;
+    // Reset sample to 1 on every testset switch
+    currentSample = '1';
     updateTestsetUi();
+    updateSampleButtons();
     showActivePanel();
   }
 
