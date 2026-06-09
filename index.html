@@ -247,18 +247,9 @@
         </p>
       </div>
 
-      <div class="numbered-list">
+      <div class="numbered-list numbered-list-3">
         <div class="num-item">
           <span class="num-mark">1</span>
-          <div>
-            <strong class="hl">Diffusion Forcing pretraining.</strong>
-            The causal student is first trained on real data with each chunk
-            independently noised at a sampled timestep — establishing a clean
-            conditional prior before distillation.
-          </div>
-        </div>
-        <div class="num-item">
-          <span class="num-mark">2</span>
           <div>
             <strong class="hl">Sync-Window DMD distillation.</strong>
             Standard DMD applies teacher CFG uniformly. We instead gate it to
@@ -268,7 +259,7 @@
           </div>
         </div>
         <div class="num-item">
-          <span class="num-mark">3</span>
+          <span class="num-mark">2</span>
           <div>
             <strong class="hl">Two-step inference, no CFG.</strong>
             At deployment, the student runs one no-CFG velocity step from
@@ -278,7 +269,7 @@
           </div>
         </div>
         <div class="num-item">
-          <span class="num-mark">4</span>
+          <span class="num-mark">3</span>
           <div>
             <strong class="hl">SyncNet reward.</strong>
             An explicit SyncNet-based reward closes the residual sync gap
@@ -443,7 +434,6 @@
           </svg>
         </button>
         <div class="vs-tset-display">
-          <span class="vs-tset-label">Test Set</span>
           <span class="vs-tset-name" id="vs-tset-name">TalkVid</span>
         </div>
         <button class="vs-tset-arrow" id="vs-tset-next" aria-label="Next test set">
@@ -738,11 +728,7 @@
       <div class="sec-label">CITATION</div>
       <h2 class="sec-heading">BibTeX</h2>
       <div class="bib-wrap">
-        <pre class="bib"><code>@misc{lipforcing2026,
-  title  = {Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization},
-  author = {Cho, Paul Hyunbin and Jang, Jinhyuk and Lee, Joungbin and Jin, Siyoon and Shin, Heeseong and Yi, Jung and Lee, SeokYoung and Park, Yunjin and Park, Chulmin and Kim, Seungryong},
-  year   = {2026}
-}</code></pre>
+        <pre class="bib"><code></code></pre>
         <button class="copy-btn" id="copy-bib" aria-label="Copy BibTeX">Copy</button>
       </div>
     </section>

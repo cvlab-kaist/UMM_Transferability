@@ -372,7 +372,7 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
    be tall, side-by-side without empty space inside either. */
 .dual-figure{
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;        /* match box heights — Framework grows to Pareto's height */
   gap: 22px;
   margin: 8px 0 18px;
 }
@@ -383,7 +383,8 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-1);
-  display: block;
+  display: flex;
+  flex-direction: column;
   min-width: 0;
   transition: box-shadow 0.25s, transform 0.25s;
 }
@@ -399,11 +400,15 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   text-transform: uppercase;
   color: var(--accent);
   padding: 12px 18px 4px;
+  flex: 0 0 auto;
 }
 .dual-fig-item img{
   display: block;
   width: 100%;
-  height: auto;          /* natural aspect — box height follows image */
+  flex: 1 1 auto;        /* image fills the rest of the box vertically */
+  min-height: 0;
+  height: auto;
+  object-fit: contain;   /* preserve aspect, letterbox if needed */
   background: #fff;
   padding: 6px 12px 12px;
 }
@@ -452,6 +457,10 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   display:grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap:14px;
+}
+/* 3-column variant for the 3-step method list */
+.numbered-list-3{
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 .num-item{
   display:grid;
@@ -556,7 +565,7 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
 }
 .preview-cell{
   flex: 0 0 auto;
-  width: clamp(220px, 26vw, 320px);
+  width: clamp(320px, 38vw, 480px);
   margin: 0;
   background: var(--surface);
   border: 1px solid var(--border);
