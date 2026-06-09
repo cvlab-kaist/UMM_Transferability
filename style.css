@@ -520,6 +520,63 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
 }
 .row-ours td{ color: var(--accent-strong); font-weight:600; }
 
+/* =============== PREVIEW (horizontal scroll strip) =============== */
+/* A horizontally-scrolling row of preview cells. The scrollbar is intentionally
+   visible underneath so users know they can scroll. */
+.preview-scroll{
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 10px 0 8px;
+  /* Visible thin scrollbar */
+  scrollbar-width: thin;                       /* Firefox */
+  scrollbar-color: var(--accent) var(--surface-2);
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;                          /* breathing room between cells and scrollbar */
+}
+.preview-scroll::-webkit-scrollbar{
+  height: 10px;
+}
+.preview-scroll::-webkit-scrollbar-track{
+  background: var(--surface-2);
+  border-radius: 999px;
+}
+.preview-scroll::-webkit-scrollbar-thumb{
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  border-radius: 999px;
+  border: 2px solid var(--surface-2);
+}
+.preview-scroll::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+}
+
+.preview-track{
+  display: flex;
+  gap: 14px;
+  padding: 4px 2px 8px;
+}
+.preview-cell{
+  flex: 0 0 auto;
+  width: clamp(220px, 26vw, 320px);
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+  transition: box-shadow 0.18s, transform 0.18s;
+}
+.preview-cell:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+.preview-cell video{
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+}
+
 /* =============== VIDEO HERO + GRID + PLACEHOLDERS =============== */
 .video-frame{
   position:relative;
