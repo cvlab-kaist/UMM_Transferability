@@ -31,7 +31,7 @@
       <a href="#hero" class="nav-link" data-section="hero">Overview</a>
       <a href="#motivation" class="nav-link" data-section="motivation">Motivation</a>
       <a href="#method" class="nav-link" data-section="method">Method</a>
-      <a href="#results" class="nav-link" data-section="results">Results</a>
+      <a href="#results" class="nav-link" data-section="results">Quantitative</a>
       <a href="#qual-ours" class="nav-link" data-section="qual-ours">Qualitative</a>
       <a href="#qual-vs" class="nav-link" data-section="qual-vs">vs. Baselines</a>
       <a href="#citation" class="nav-link" data-section="citation">Citation</a>
@@ -52,14 +52,22 @@
         </h1>
 
         <div class="authors-grid">
-          <div class="author-card"><span class="author-name">Anonymous Author 1</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Anonymous Author 2</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Anonymous Author 3</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Anonymous Author 4</span><sup>2</sup></div>
+          <div class="author-card"><span class="author-name">Paul Hyunbin Cho</span><sup>1,*</sup></div>
+          <div class="author-card"><span class="author-name">Jinhyuk Jang</span><sup>1,*</sup></div>
+          <div class="author-card"><span class="author-name">Joungbin Lee</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Siyoon Jin</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Heeseong Shin</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Jung Yi</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">SeokYoung Lee</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Yunjin Park</span><sup>2</sup></div>
+          <div class="author-card"><span class="author-name">Chulmin Park</span><sup>2</sup></div>
+          <div class="author-card"><span class="author-name">Seungryong Kim</span><sup>1,&dagger;</sup></div>
         </div>
         <p class="affil-legend">
-          <sup>1</sup>Affiliation A &nbsp;&nbsp;·&nbsp;&nbsp;
-          <sup>2</sup>Affiliation B
+          <sup>1</sup>KAIST AI &nbsp;&nbsp;·&nbsp;&nbsp;
+          <sup>2</sup>AIPARK
+          <br>
+          <span class="affil-foot"><sup>*</sup>Equal contribution &nbsp;&nbsp;·&nbsp;&nbsp; <sup>&dagger;</sup>Corresponding author</span>
         </p>
 
         <div class="links-row">
@@ -70,7 +78,7 @@
             </svg>
             <span>Paper</span>
           </a>
-          <a href="#" class="link-btn" target="_blank" rel="noopener">
+          <a href="https://github.com/cvlab-kaist/Lip-Forcing" class="link-btn" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 18 22 12 16 6"></polyline>
               <polyline points="8 6 2 12 8 18"></polyline>
@@ -111,7 +119,7 @@
       <div class="stat-strip">
         <div class="stat-card">
           <div class="stat-num">31<span class="stat-unit"> FPS</span></div>
-          <div class="stat-label">Real-time on a single H100</div>
+          <div class="stat-label">Real-time on a single GPU (H100)</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">2<span class="stat-unit"> steps</span></div>
@@ -119,11 +127,11 @@
         </div>
         <div class="stat-card">
           <div class="stat-num">17.6<span class="stat-unit">×</span></div>
-          <div class="stat-label">1.3B causal vs. same-scale bidirectional</div>
+          <div class="stat-label">1.3B causal student vs. same-scale bidirectional</div>
         </div>
         <div class="stat-card">
           <div class="stat-num">39.7<span class="stat-unit">×</span></div>
-          <div class="stat-label">14B student vs. its teacher</div>
+          <div class="stat-label">14B causal student vs. same-scale bidirectional</div>
         </div>
       </div>
     </section>
@@ -239,12 +247,12 @@
       </div>
     </section>
 
-    <!-- ============== RESULTS ============== -->
+    <!-- ============== QUANTITATIVE ============== -->
     <section id="results" class="sec">
-      <div class="sec-label">RESULTS</div>
-      <h2 class="sec-heading">Quantitative results</h2>
+      <div class="sec-label">QUANTITATIVE</div>
+      <h2 class="sec-heading">Comparison on HDTF</h2>
       <p class="sec-lead">
-        Main comparison on HDTF. Throughput on a single H100. Best in
+        Throughput measured on a single H100. Best in
         <strong>bold</strong>; second-best <u>underlined</u>.
       </p>
 
@@ -689,12 +697,10 @@
       <div class="sec-label">CITATION</div>
       <h2 class="sec-heading">BibTeX</h2>
       <div class="bib-wrap">
-        <pre class="bib"><code>@inproceedings{lipforcing2026,
-  title     = {Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization},
-  author    = {Anonymous Authors},
-  booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
-  year      = {2026},
-  note      = {Under review}
+        <pre class="bib"><code>@misc{lipforcing2026,
+  title  = {Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization},
+  author = {Cho, Paul Hyunbin and Jang, Jinhyuk and Lee, Joungbin and Jin, Siyoon and Shin, Heeseong and Yi, Jung and Lee, SeokYoung and Park, Yunjin and Park, Chulmin and Kim, Seungryong},
+  year   = {2026}
 }</code></pre>
         <button class="copy-btn" id="copy-bib" aria-label="Copy BibTeX">Copy</button>
       </div>
