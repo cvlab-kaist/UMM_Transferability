@@ -107,6 +107,59 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   fadeTargets.forEach(t => fadeObserver.observe(t));
 
+  // ---------- Preview: mouse-position-driven horizontal scroll ----------
+  // The further left/right the cursor is from the strip's center, the faster
+  // it pans in that direction. A small deadzone in the middle keeps it from
+  // drifting when the user is just reading. Touch devices skip this entirely
+  // and rely on native swipe.
+  const previewScroll = document.querySelector('.preview-scroll');
+  if(previewScroll && !matchMedia('(hover: none)').matches){
+    const MAX_SPEED = 16;     // px per frame at the very edge
+    const DEADZONE  = 0.12;   // ±12% center band = stand still
+    let mouseX = null;
+    let rect   = null;
+    let rafId  = null;
+
+    function tick(){
+      if(mouseX === null){ rafId = null; return; }
+      const w = rect.width;
+      const pos = (mouseX - rect.left) / w;        // 0..1 across the strip
+      let signal = (pos - 0.5) * 2;                 // -1..+1
+      if(Math.abs(signal) < DEADZONE){
+        signal = 0;
+      }else{
+        // Re-map (DEADZONE..1) to (0..1) and clamp so the edges = full speed.
+        const s = Math.sign(signal);
+        const m = (Math.abs(signal) - DEADZONE) / (1 - DEADZONE);
+        signal = s * Math.min(1, m);
+      }
+      if(signal !== 0){
+        previewScroll.scrollLeft += signal * MAX_SPEED;
+      }
+      rafId = requestAnimationFrame(tick);
+    }
+
+    previewScroll.addEventListener('mouseenter', (e) => {
+      rect = previewScroll.getBoundingClientRect();
+      mouseX = e.clientX;
+      previewScroll.classList.add('hover-active');
+      if(!rafId) rafId = requestAnimationFrame(tick);
+    });
+    previewScroll.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      // Re-measure cheaply — handles scroll/resize while the cursor is inside.
+      rect = previewScroll.getBoundingClientRect();
+    });
+    previewScroll.addEventListener('mouseleave', () => {
+      mouseX = null;
+      previewScroll.classList.remove('hover-active');
+    });
+    // Recompute rect on window resize so the deadzone stays centered.
+    window.addEventListener('resize', () => {
+      if(mouseX !== null) rect = previewScroll.getBoundingClientRect();
+    });
+  }
+
   // ---------- VS-baselines testset arrows + sample picker ----------
   // The vs-stage contains 9 panels: 3 testsets × 3 samples. Only the panel
   // matching (currentTestset, currentSample) is visible at any time.

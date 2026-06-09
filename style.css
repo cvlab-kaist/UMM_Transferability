@@ -412,6 +412,11 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   background: #fff;
   padding: 6px 12px 12px;
 }
+/* Cap the Pareto image height — this drives the row height down, and the
+   stretched Framework box matches. Net effect: a shorter, balanced row. */
+.dual-fig-item:nth-child(2) img{
+  max-height: 280px;
+}
 
 @media (max-width: 820px){
   .dual-figure{ flex-direction: column; }
@@ -529,34 +534,23 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
 }
 .row-ours td{ color: var(--accent-strong); font-weight:600; }
 
-/* =============== PREVIEW (horizontal scroll strip) =============== */
-/* A horizontally-scrolling row of preview cells. The scrollbar is intentionally
-   visible underneath so users know they can scroll. */
+/* =============== PREVIEW (mouse-position-driven horizontal scroll) =============== */
+/* The row scrolls based on where the cursor is — hover left to pan left,
+   hover right to pan right, deadzone in the middle. The native scrollbar
+   is hidden (touch swipe still works on touch devices). */
 .preview-scroll{
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
   margin: 10px 0 8px;
-  /* Visible thin scrollbar */
-  scrollbar-width: thin;                       /* Firefox */
-  scrollbar-color: var(--accent) var(--surface-2);
+  scrollbar-width: none;                 /* Firefox: hide */
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 8px;                          /* breathing room between cells and scrollbar */
+  /* Soft fades on the left + right edges hint that the row can pan */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 32px, #000 calc(100% - 32px), transparent 100%);
 }
-.preview-scroll::-webkit-scrollbar{
-  height: 10px;
-}
-.preview-scroll::-webkit-scrollbar-track{
-  background: var(--surface-2);
-  border-radius: 999px;
-}
-.preview-scroll::-webkit-scrollbar-thumb{
-  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-  border-radius: 999px;
-  border: 2px solid var(--surface-2);
-}
-.preview-scroll::-webkit-scrollbar-thumb:hover{
-  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
-}
+.preview-scroll::-webkit-scrollbar{ display: none; }   /* Chrome/Safari: hide */
+.preview-scroll.hover-active{ cursor: ew-resize; }     /* cue when JS hover-scroll is armed */
 
 .preview-track{
   display: flex;
