@@ -274,6 +274,29 @@
       cell.addEventListener('mousemove', onMove);
       cell.addEventListener('mouseleave', onLeave);
     });
+
+    // Mirror the source video's play / pause / seek into the inner lens video
+    // EVEN WHEN THE MOUSE IS STILL. Without this, the lens content kept
+    // playing whenever the source got paused via the controls without moving
+    // the cursor (the only previous sync hook was inside onMove).
+    document.querySelectorAll('.vs-cell video').forEach(v => {
+      const matchesLensSource = () => (v.currentSrc || v.src) === currentSrc;
+
+      v.addEventListener('pause', () => {
+        if(!matchesLensSource()) return;
+        try{ inner.pause(); }catch(e){}
+        inner.currentTime = v.currentTime;
+      });
+      v.addEventListener('play', () => {
+        if(!matchesLensSource() || !enabled) return;
+        inner.currentTime = v.currentTime;
+        inner.play().catch(()=>{});
+      });
+      v.addEventListener('seeking', () => {
+        if(!matchesLensSource()) return;
+        inner.currentTime = v.currentTime;
+      });
+    });
   }
 
   // ---------- VS-baselines synchronized playback ----------
