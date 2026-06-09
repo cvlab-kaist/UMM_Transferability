@@ -114,8 +114,8 @@
   // and rely on native swipe.
   const previewScroll = document.querySelector('.preview-scroll');
   if(previewScroll && !matchMedia('(hover: none)').matches){
-    const MAX_SPEED = 16;     // px per frame at the very edge
-    const DEADZONE  = 0.12;   // ±12% center band = stand still
+    const MAX_SPEED = 18;     // px per frame at the very edge
+    const DEADZONE  = 0.55;   // ±55% center band = stand still (only outer ~22% on each side pans)
     let mouseX = null;
     let rect   = null;
     let rafId  = null;
