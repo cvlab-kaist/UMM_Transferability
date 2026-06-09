@@ -89,16 +89,6 @@
         </div>
       </div>
 
-      <!-- MAIN VIDEO — the hero element. Replaces the static teaser. -->
-      <div id="main-video" class="video-frame video-hero" data-empty="true">
-        <video controls preload="metadata" poster="assets/teaser.png">
-          <source src="videos/main_demo.mp4" type="video/mp4">
-        </video>
-        <div class="placeholder-overlay">
-          <span class="placeholder-pill">Place your concatenated demo at <code>videos/main_demo.mp4</code></span>
-        </div>
-      </div>
-
       <!-- TL;DR -->
       <div class="tldr">
         <strong class="tldr-tag">TL;DR</strong>
@@ -191,7 +181,7 @@
           No fixed CFG scale optimizes both axes.
           <strong>(b)</strong> An Euler-step 2×2 factorial over schedules
           $(s_0, s_1)$ shows that mixed schedules recover most of the sync gap
-          when the second step lands near $j\!=\!30$.
+          when the second step lands near $j_1\!=\!30$.
         </figcaption>
       </figure>
 
@@ -202,15 +192,15 @@
           of reference fidelity, and the two regimes do not coexist at any single CFG
           scale. To distill this into a two-step student we run an Euler-step factorial
           over $(s_0, s_1)\in\{1.0, 4.5\}^2$; the <strong>no-CFG&nbsp;→&nbsp;CFG</strong>
-          schedule lands near <strong class="hl">t&thinsp;=&thinsp;0.769</strong>
+          schedule lands near <strong class="hl">$\tau\!=\!0.769$</strong>
           (~ODE step&nbsp;30) on the reference-leaning side of the joint
           reference–sync optimum — reference fidelity close to the CFG=1.0
           ceiling and sync close to the CFG=4.5 ceiling.
           The remaining sync gap is closeable with explicit SyncNet supervision, while
           the reference cost incurred by a guided first step is not. This selects the
           <strong>operating point</strong> the student is trained to land on at
-          inference: a single landing at $t\!=\!0.769$ after one no-CFG velocity step
-          from $t\!=\!0.999$.
+          inference: a single landing at $\tau\!=\!0.769$ after one no-CFG velocity step
+          from $\tau\!=\!0.999$.
         </p>
       </div>
     </section>
@@ -264,8 +254,8 @@
           <div>
             <strong class="hl">Two-step inference, no CFG.</strong>
             At deployment, the student runs one no-CFG velocity step from
-            $t\!=\!0.999$ to a landing at $t\!=\!0.769$, then one final
-            denoising step to $t\!=\!0$. No classifier-free guidance is used
+            $\tau\!=\!0.999$ to a landing at $\tau\!=\!0.769$, then one final
+            denoising step to $\tau\!=\!0$. No classifier-free guidance is used
             at inference.
           </div>
         </div>
