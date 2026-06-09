@@ -388,10 +388,9 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   min-width: 0;
   transition: box-shadow 0.25s, transform 0.25s;
 }
-/* Framework ~64%, Pareto ~36% — tuned so the Framework image (aspect 2.35,
-   capped at 280px tall) nearly fills its column width with minimal side
-   whitespace, and Pareto retains a comfortable portrait box. */
-.dual-fig-item:nth-child(1){ flex: 1.8 1 0; }
+/* Framework ~58%, Pareto ~42% — giving the portrait Pareto chart a wider
+   column so it reads larger than the previous narrow slice. */
+.dual-fig-item:nth-child(1){ flex: 1.4 1 0; }
 .dual-fig-item:nth-child(2){ flex: 1 1 0; }
 
 .dual-fig-item:hover{ box-shadow: var(--shadow-2); }
@@ -410,7 +409,7 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   flex: 1 1 auto;        /* image fills the rest of the box vertically */
   min-height: 0;
   height: auto;
-  max-height: 280px;     /* unified cap on both items keeps the row short */
+  max-height: 340px;     /* unified cap; gives Pareto more vertical room */
   object-fit: contain;   /* show the full diagram / chart, never crop */
   background: #fff;
   padding: 6px 12px 12px;
