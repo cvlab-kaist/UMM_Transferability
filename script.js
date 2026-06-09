@@ -46,6 +46,13 @@
 
   // IntersectionObserver — track the topmost section in view
   const spyObserver = new IntersectionObserver((entries) => {
+    // When we're scrolled near the very top, always show Overview as active
+    // (the hero's top edge sits in the observer's negative top-margin band, so
+    // it may not fire — fall back to "near top" detection here).
+    if(window.scrollY < 80 && sections.length){
+      setActive(sections[0].id);
+      return;
+    }
     const visible = entries
       .filter(e => e.isIntersecting)
       .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
@@ -54,6 +61,14 @@
     }
   }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
   sections.forEach(s => spyObserver.observe(s));
+
+  // Also re-check on every scroll (cheap) so the near-top → Overview rule
+  // fires immediately when the user scrolls all the way back up.
+  document.addEventListener('scroll', () => {
+    if(window.scrollY < 80 && sections.length){
+      setActive(sections[0].id);
+    }
+  }, { passive: true });
 
   // Initial active: first observed target
   if(sections.length) setActive(sections[0].id);

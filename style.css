@@ -632,68 +632,6 @@ code{ font-family:var(--font-mono); font-size:0.92em; background:var(--surface-2
   background: var(--surface-2);
 }
 
-/* =============== SPEED DEMO =============== */
-.video-demo{
-  aspect-ratio: 16 / 9;
-  max-width: 100%;
-  margin: 18px 0 22px;
-  border: 1px solid var(--border);
-  position:relative;
-}
-.video-demo[data-empty="true"] .placeholder-overlay{
-  background:
-    repeating-linear-gradient(45deg,
-      rgba(34, 184, 207, 0.08),
-      rgba(34, 184, 207, 0.08) 12px,
-      rgba(255, 255, 255, 0.95) 12px,
-      rgba(255, 255, 255, 0.95) 24px);
-}
-.speed-callouts{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-top: 18px;
-}
-.callout-card{
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--accent-cyan);
-  border-radius: var(--radius);
-  padding: 18px 22px;
-  display:flex; gap: 22px; align-items:center;
-  transition: transform 0.18s, box-shadow 0.18s;
-}
-.callout-card:hover{
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-1);
-}
-.callout-card:nth-child(2){ border-left-color: var(--accent); }
-.callout-num{
-  font-family: var(--font-serif);
-  font-size: 1.85rem;
-  font-weight: 700;
-  color: var(--accent-strong);
-  line-height: 1;
-  flex-shrink: 0;
-  letter-spacing: -0.02em;
-}
-.callout-card:first-child .callout-num{ color: var(--accent-cyan); }
-.callout-unit{
-  font-size: 0.55em;
-  color: var(--text-soft);
-  font-weight: 500;
-}
-.callout-text{
-  font-size: 0.92rem;
-  color: var(--text-soft);
-  line-height: 1.45;
-}
-.callout-text strong{ color: var(--text); }
-@media (max-width: 720px){
-  .speed-callouts{ grid-template-columns: 1fr; }
-  .callout-card{ flex-direction: column; align-items: flex-start; gap: 8px; }
-}
-
 /* =============== BIBTEX =============== */
 .bib-wrap{
   position:relative;

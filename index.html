@@ -29,11 +29,9 @@
     </div>
     <nav class="sidebar-nav">
       <a href="#hero" class="nav-link" data-section="hero">Overview</a>
-      <a href="#main-video" class="nav-link" data-section="main-video">Demo</a>
       <a href="#motivation" class="nav-link" data-section="motivation">Motivation</a>
       <a href="#method" class="nav-link" data-section="method">Method</a>
       <a href="#results" class="nav-link" data-section="results">Results</a>
-      <a href="#speed-demo" class="nav-link" data-section="speed-demo">Speed demo</a>
       <a href="#qual-ours" class="nav-link" data-section="qual-ours">Qualitative</a>
       <a href="#qual-vs" class="nav-link" data-section="qual-vs">vs. Baselines</a>
       <a href="#citation" class="nav-link" data-section="citation">Citation</a>
@@ -349,37 +347,6 @@
         See the Pareto frontier in the <a href="#method">Method</a>
         section for the speed-quality view of these numbers.
       </p>
-    </section>
-
-    <!-- ============== SPEED DEMO ============== -->
-    <section id="speed-demo" class="sec">
-      <div class="sec-label">SPEED DEMO</div>
-      <h2 class="sec-heading">Real-time generation, live</h2>
-      <p class="sec-lead">
-        Captured screen recording of the 1.3B model decoding frames as the audio
-        plays. The two-step student streams chunks as they're denoised — there's
-        no full-clip prefill latency.
-      </p>
-
-      <div class="video-frame video-demo" data-empty="true">
-        <video controls preload="metadata" poster="assets/teaser.png">
-          <source src="videos/speed_demo.mp4" type="video/mp4">
-        </video>
-        <div class="placeholder-overlay">
-          <span class="placeholder-pill">Place the screen-cap demo at <code>videos/speed_demo.mp4</code></span>
-        </div>
-      </div>
-
-      <div class="speed-callouts">
-        <div class="callout-card">
-          <div class="callout-num">31&nbsp;<span class="callout-unit">FPS</span></div>
-          <div class="callout-text">crosses the 25 FPS playback rate of the test videos — the model generates frames <strong>faster than they play</strong>.</div>
-        </div>
-        <div class="callout-card">
-          <div class="callout-num">2&nbsp;<span class="callout-unit">steps</span></div>
-          <div class="callout-text">per chunk, no inference-time CFG. Time-to-first-frame is the lowest among all diffusion baselines.</div>
-        </div>
-      </div>
     </section>
 
     <!-- ============== QUALITATIVE — OURS ONLY ============== -->
