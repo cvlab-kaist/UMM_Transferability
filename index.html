@@ -72,7 +72,7 @@
         </p>
 
         <div class="links-row">
-          <a href="#" class="link-btn" target="_blank" rel="noopener">
+          <a href="https://arxiv.org/abs/2606.11180" class="link-btn" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
@@ -234,7 +234,7 @@
           student delivers a&nbsp;<strong>4.7× throughput gain</strong> over
           LatentSync at comparable reference fidelity. No prior method occupies
           the upper-right region; the closest competitors trade off either
-          quality (Wav2Lip, MuseTalk) or speed (LatentSync, OmniAvatar).
+          quality (Diff2Lip) or speed (LatentSync, OmniAvatar).
         </p>
       </div>
 
@@ -304,28 +304,9 @@
             </tr>
             <tr class="row-sep"></tr>
             <tr>
-              <td class="th-left">Wav2Lip</td>
-              <td>—</td><td><strong>479.60</strong></td><td><strong>0.17</strong></td>
-              <td><u>8.56</u></td><td>6.70</td>
-              <td>0.946</td><td>24.15</td><td>384.82</td><td>0.911</td>
-            </tr>
-            <tr>
-              <td class="th-left">VideoReTalking</td>
-              <td>—</td><td>2.67</td><td>3.76</td>
-              <td>8.22</td><td>6.70</td>
-              <td>0.910</td><td>24.59</td><td>306.63</td><td>0.883</td>
-            </tr>
-            <tr>
-              <td class="th-left">MuseTalk</td>
-              <td>1</td><td>23.07</td><td>2.72</td>
-              <td>7.94</td><td>6.95</td>
-              <td><u>0.957</u></td><td>9.68</td><td>127.44</td><td><u>0.943</u></td>
-            </tr>
-            <tr class="row-sep"></tr>
-            <tr>
               <td class="th-left">Diff2Lip</td>
               <td>25</td><td>15.47</td><td>5.04</td>
-              <td>8.35</td><td><u>6.32</u></td>
+              <td><u>8.35</u></td><td><u>6.32</u></td>
               <td>0.943</td><td>20.32</td><td>285.69</td><td>0.907</td>
             </tr>
             <tr>
@@ -356,13 +337,13 @@
             <tr class="row-sep"></tr>
             <tr>
               <td class="th-left">Self&nbsp;Forcing (1.3B)</td>
-              <td>4</td><td>27.48</td><td>0.38</td>
+              <td>4</td><td><u>27.48</u></td><td><u>0.38</u></td>
               <td>7.12</td><td>7.80</td>
               <td>0.939</td><td>7.51</td><td>124.78</td><td>0.915</td>
             </tr>
             <tr class="row-ours">
               <td class="th-left"><strong>Lip Forcing (1.3B)</strong></td>
-              <td>2</td><td><u>31.58</u></td><td><u>0.32</u></td>
+              <td>2</td><td><strong>31.58</strong></td><td><strong>0.32</strong></td>
               <td>6.88</td><td>7.93</td>
               <td>0.943</td><td><u>6.76</u></td><td>118.86</td><td>0.919</td>
             </tr>
@@ -370,7 +351,7 @@
               <td class="th-left"><strong>Lip Forcing (14B)</strong></td>
               <td>2</td><td>15.11</td><td>0.54</td>
               <td>7.59</td><td>7.23</td>
-              <td>0.949</td><td>7.01</td><td><strong>107.88</strong></td><td>0.938</td>
+              <td><u>0.949</u></td><td>7.01</td><td><strong>107.88</strong></td><td><u>0.938</u></td>
             </tr>
           </tbody>
         </table>
@@ -719,7 +700,15 @@
       <div class="sec-label">CITATION</div>
       <h2 class="sec-heading">BibTeX</h2>
       <div class="bib-wrap">
-        <pre class="bib"><code></code></pre>
+        <pre class="bib"><code>@misc{cho2026lipforcingfewstepautoregressive,
+  title         = {Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization},
+  author        = {Paul Hyunbin Cho and Jinhyuk Jang and SeokYoung Lee and Joungbin Lee and Siyoon Jin and Heeseong Shin and Jung Yi and Yunjin Park and Chulmin Park and Seungryong Kim},
+  year          = {2026},
+  eprint        = {2606.11180},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  url           = {https://arxiv.org/abs/2606.11180}
+}</code></pre>
         <button class="copy-btn" id="copy-bib" aria-label="Copy BibTeX">Copy</button>
       </div>
     </section>
