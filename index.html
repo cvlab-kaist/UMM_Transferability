@@ -24,8 +24,8 @@
   <!-- ============================== SIDEBAR ============================== -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <span class="brand-mark">UMM</span>
-      <span class="brand-name">Transferability</span>
+      <span class="brand-mark">Transferability</span>
+      <!-- <span class="brand-name">in UMM</span> -->
     </div>
     <nav class="sidebar-nav">
       <a href="#hero" class="nav-link" data-section="hero">Overview</a>
@@ -48,20 +48,19 @@
       <!-- Centered title / authors / links block -->
       <div class="hero-head">
         <h1 class="hero-title">
-          <span class="hero-accent">Transferability</span> Between<br>
-          Understanding &amp; Generation<br>
+          <span class="hero-accent">Transferability</span> Between<br> Understanding &amp; Generation<br>
           <span class="hero-sub">in Unified Multimodal Models</span>
         </h1>
 
         <div class="authors-grid">
-          <div class="author-card"><span class="author-name">Jiwon Kang</span><sup>1,*</sup></div>
-          <div class="author-card"><span class="author-name">Heeji Yoon</span><sup>1,*</sup></div>
-          <div class="author-card"><span class="author-name">Jaewoo Jung</span><sup>1</sup></div>
+          <div class="author-card"><a class="author-name" href="https://loggerjk.github.io/" target="_blank" rel="noopener">Jiwon Kang</a><sup>1,*</sup></div>
+          <div class="author-card"><a class="author-name" href="https://yoon-heez.github.io/" target="_blank" rel="noopener">Heeji Yoon</a><sup>1,*</sup></div>
+          <div class="author-card"><a class="author-name" href="https://crepejung00.github.io/" target="_blank" rel="noopener">Jaewoo Jung</a><sup>1</sup></div>
           <div class="author-card"><span class="author-name">Jaewon Min</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Minkyeong Jeon</span><sup>1</sup></div>
+          <div class="author-card"><a class="author-name" href="https://sites.google.com/view/minjeon/home" target="_blank" rel="noopener">Minkyeong Jeon</a><sup>1</sup></div>
           <div class="author-card"><span class="author-name">Biyeon Hwang</span><sup>2</sup></div>
-          <div class="author-card"><span class="author-name">Sangwon Jung</span><sup>3,&dagger;</sup></div>
-          <div class="author-card"><span class="author-name">Seungryong Kim</span><sup>1,&dagger;</sup></div>
+          <div class="author-card"><a class="author-name" href="https://successful-humor-4db.notion.site/Sangwon-Jung-70109a49767a470092a6ee0d02c78313" target="_blank" rel="noopener">Sangwon Jung</a><sup>3,&dagger;</sup></div>
+          <div class="author-card"><a class="author-name" href="https://cvlab.kaist.ac.kr/" target="_blank" rel="noopener">Seungryong Kim</a><sup>1,&dagger;</sup></div>
         </div>
         <p class="affil-legend">
           <sup>1</sup>KAIST AI &nbsp;&nbsp;·&nbsp;&nbsp;
@@ -92,7 +91,7 @@
       <!-- Central question → finding, as cards -->
       
       <p class="hero-gap">
-      Earlier UMM studies generally report that scaling up the amount and duration of understanding training improves generation benchmark performance (GenEval, ...), and vice versa (MMMU...). However, such broad benchmark scores cannot tell us whether a specific skill — like counting — is shared between image understanding and generation. We look at this directly, one capability at a time.
+      Earlier UMM studies generally report that scaling up the amount and duration of image understanding training improves generation benchmark performance (GenEval, ...), and vice versa (MMMU...). However, such broad benchmark scores cannot tell us whether a specific skill — like counting — is shared between image understanding and generation. We look at this directly, one capability at a time.
       </p>
 
       <div class="qa-block">
@@ -134,7 +133,7 @@
 
       
       <div class="takeaway">
-        <span class="takeaway-key">Takeaway</span>
+        <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#1</span></span>
         <p>
           We empirically observe that <strong>transfer appears most clearly in architecture
           (a) &mdash; a shared backbone with a unified encoder &mdash; </strong>
@@ -236,14 +235,14 @@
       </div>
       <p class="cap">
         <!-- Accuracy&nbsp;(%)&nbsp;&uarr;, MAD&nbsp;&darr;; deltas vs. Baseline. -->
-         · MAD : <em>Mean Average Difference</em> between predicted and ground-truth counts. Lower is better. <br>
+         · MAD : <em>Mean Average Deviation</em> between predicted and ground-truth counts. Lower is better. <br>
       </p>
       
 
 
       <h3 class="sub-heading">Capability #2: Spatial Relation</h3>
       <div class="table-wrap">
-        <table class="results-table">
+        <table class="results-table results-table--sm">
           <thead>
             <tr>
               <th  rowspan="2">Eval</th>
@@ -322,7 +321,7 @@
         </div>
       </div>
       <div class="takeaway">
-        <span class="takeaway-key">Takeaway</span>
+        <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#2</span></span>
         <p>
           <em>und</em>&rarr;<em>gen</em> (Transfer) can <strong>improve target generative capabilities</strong> while <strong>
             keeping image quality closer to the baseline (lower FID)</strong>. Direct training achieves better accuracy, but image distribution drifts much higher from the baseline (higher FID).
@@ -390,6 +389,12 @@
         accuracy (+7 vs.&nbsp;+13&nbsp;pp) but keeps FID lower (30.95 vs. 32.28).
       </p> -->
 
+      <p class="cap">
+        <!-- Accuracy&nbsp;(%)&nbsp;&uarr;, MAD&nbsp;&darr;; deltas vs. Baseline. -->
+         · To measure distribution shift from baseline, FID is computed between baseline-generated images. Lower FID indicates lower distribution shift.<br>
+      </p>
+      
+
       <div class="qa-card qa-question">
         <span class="qa-tag">Interpretations</span>
         <p>
@@ -412,10 +417,10 @@
         achieved 1.5&times; the improvement of direct training.
       </p>
       <div class="takeaway">
-        <span class="takeaway-key">Takeaway #2</span>
+        <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#3</span></span>
         <p>
           Not always. In our Lumina-DiMOO experiments, <em>und</em>&rarr;<em>gen</em> tends to be
-          stronger for counting and spatial relation, while <em>gen</em>&rarr;<em>und</em> tends to be stronger for text. We hypothesize this is because text depends on fine-grained, <strong>pixel-level detail</strong> &mdash; which the generation objective may capture more directly than understanding does.
+          stronger for counting and spatial relation, while <em>gen</em>&rarr;<em>und</em> tends to be stronger for text capability. We hypothesize this is because text depends on fine-grained, <strong>pixel-level detail</strong> &mdash; which the generation objective may capture more directly than understanding does.
         </p>
       </div>
 
@@ -423,7 +428,7 @@
         <table class="results-table">
           <thead>
             <tr>
-              <th  rowspan="2">Transfer Direction</th>
+              <th  rowspan="2">Train&rarr;Test</th>
               <th class="grp" colspan="2">Counting</th>
               <th class="grp" colspan="1">Spatial Relation</th>
               <th class="grp" colspan="3">Text Recog./Gen.</th>
@@ -435,7 +440,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr class="row-ours">
+            <tr>
               <td ><em>und</em> &rarr; <em>gen</em></td>
               <td><strong>100%</strong></td>
               <td><strong>140%</strong></td>
@@ -463,7 +468,7 @@
 
       <h3 class="sub-heading">Does existence of transferability guarantee simultaneous gains on joint training?</h3>
       <div class="takeaway">
-        <span class="takeaway-key">Takeaway</span>
+        <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#4</span></span>
         <p>
           Not necessarily. When we trained <em>und</em>+<em>gen</em> together, the two did
           not improve at the same time &mdash; understanding rose while generation fell,
@@ -471,13 +476,13 @@
           doesn&rsquo;t guarantee gains in both directions at once.
         </p>
       </div>
-      <figure class="figure-medium">
+      <figure class="figure-wide">
         <img src="assets/joint_training.png" alt="Joint und+gen training on counting: understanding accuracy rises in the first half while generation falls, then the trend reverses — an oscillatory trade-off">
         <figcaption>
           <strong>Joint <em>und</em>+<em>gen</em> training on counting (Lumina-DiMOO).</strong>
           <strong>(a)</strong> understanding and <strong>(b)</strong> generation accuracy
           (blue) / MAD (red) over epochs. The two objectives improve in alternation rather
-          than together; one possible explanation is that understanding and generation
+          than together: Understanding accuracy increases in the first half of training while generation accuracy declines, and the trend reverses in the latter half. One possible explanation is that understanding and generation
           favour different alignment patterns, producing conflicting signals during joint
           optimization.
         </figcaption>
