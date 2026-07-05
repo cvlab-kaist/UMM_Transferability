@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lip Forcing — Few-Step Autoregressive Diffusion for Real-time Lip Synchronization</title>
-<meta name="description" content="Lip Forcing: the first autoregressive diffusion model for V2V lip synchronization. 31 FPS real-time on a single GPU.">
+<title>Transferability Between Understanding and Generation in Unified Multimodal Models</title>
+<meta name="description" content="Do capabilities transfer between understanding and generation in Unified Multimodal Models? We show cross-task transfer depends on architecture, and leverage it to improve generation by training understanding — while preserving image quality. ECCV 2026.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,19 +24,19 @@
   <!-- ============================== SIDEBAR ============================== -->
   <aside class="sidebar">
     <div class="sidebar-brand">
-      <span class="brand-mark">LF</span>
-      <span class="brand-name">Lip Forcing</span>
+      <span class="brand-mark">UMM</span>
+      <span class="brand-name">Transferability</span>
     </div>
     <nav class="sidebar-nav">
       <a href="#hero" class="nav-link" data-section="hero">Overview</a>
-      <a href="#preview" class="nav-link" data-section="preview">Preview</a>
-      <a href="#motivation" class="nav-link" data-section="motivation">Motivation</a>
-      <a href="#method" class="nav-link" data-section="method">Method</a>
-      <a href="#results" class="nav-link" data-section="results">Quantitative</a>
-      <a href="#qual-ours" class="nav-link" data-section="qual-ours">Qualitative</a>
-      <a href="#qual-vs" class="nav-link" data-section="qual-vs">vs. Baselines</a>
+      <a href="#section1" class="nav-link" data-section="section1">Architecture analysis</a>
+      <a href="#section2" class="nav-link" data-section="section2">Practical Recipe</a>
+      <a href="#section3" class="nav-link" data-section="section3">Discussions</a>
       <a href="#citation" class="nav-link" data-section="citation">Citation</a>
     </nav>
+    <div class="sidebar-foot">
+      <span class="venue-badge">ECCV 2026</span>
+    </div>
   </aside>
 
   <!-- ============================== MAIN ============================== -->
@@ -48,38 +48,38 @@
       <!-- Centered title / authors / links block -->
       <div class="hero-head">
         <h1 class="hero-title">
-          <span class="hero-accent">Lip Forcing</span><span class="hero-sep">:</span><br>
-          <span class="hero-sub">Few-Step Autoregressive Diffusion<br>for Real-time Lip Synchronization</span>
+          <span class="hero-accent">Transferability</span> Between<br>
+          Understanding &amp; Generation<br>
+          <span class="hero-sub">in Unified Multimodal Models</span>
         </h1>
 
         <div class="authors-grid">
-          <div class="author-card"><span class="author-name">Paul Hyunbin Cho</span><sup>1,*</sup></div>
-          <div class="author-card"><span class="author-name">Jinhyuk Jang</span><sup>1,*</sup></div>
-          <div class="author-card"><span class="author-name">SeokYoung Lee</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Joungbin Lee</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Siyoon Jin</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Heeseong Shin</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Jung Yi</span><sup>1</sup></div>
-          <div class="author-card"><span class="author-name">Yunjin Park</span><sup>2</sup></div>
-          <div class="author-card"><span class="author-name">Chulmin Park</span><sup>2</sup></div>
+          <div class="author-card"><span class="author-name">Jiwon Kang</span><sup>1,*</sup></div>
+          <div class="author-card"><span class="author-name">Heeji Yoon</span><sup>1,*</sup></div>
+          <div class="author-card"><span class="author-name">Jaewoo Jung</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Jaewon Min</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Minkyeong Jeon</span><sup>1</sup></div>
+          <div class="author-card"><span class="author-name">Biyeon Hwang</span><sup>2</sup></div>
+          <div class="author-card"><span class="author-name">Sangwon Jung</span><sup>3,&dagger;</sup></div>
           <div class="author-card"><span class="author-name">Seungryong Kim</span><sup>1,&dagger;</sup></div>
         </div>
         <p class="affil-legend">
           <sup>1</sup>KAIST AI &nbsp;&nbsp;·&nbsp;&nbsp;
-          <sup>2</sup>AIPARK
+          <sup>2</sup>Blynx &nbsp;&nbsp;·&nbsp;&nbsp;
+          <sup>3</sup>Trillionlabs
           <br>
-          <span class="affil-foot"><sup>*</sup>Equal contribution &nbsp;&nbsp;·&nbsp;&nbsp; <sup>&dagger;</sup>Corresponding author</span>
+          <span class="affil-foot"><sup>*</sup>Equal contribution &nbsp;&nbsp;·&nbsp;&nbsp; <sup>&dagger;</sup>Co-corresponding author</span>
         </p>
 
         <div class="links-row">
-          <a href="https://arxiv.org/abs/2606.11180" class="link-btn" target="_blank" rel="noopener">
+          <a href="#" class="link-btn" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
               <polyline points="14 2 14 8 20 8"></polyline>
             </svg>
             <span>Paper</span>
           </a>
-          <a href="https://github.com/cvlab-kaist/LipForcing" class="link-btn" target="_blank" rel="noopener">
+          <a href="#" class="link-btn" target="_blank" rel="noopener">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="16 18 22 12 16 6"></polyline>
               <polyline points="8 6 2 12 8 18"></polyline>
@@ -89,610 +89,401 @@
         </div>
       </div>
 
-      <!-- TL;DR -->
-      <div class="tldr">
-        <strong class="tldr-tag">TL;DR</strong>
+      <!-- Central question → finding, as cards -->
+      
+      <p class="hero-gap">
+      Earlier UMM studies generally report that scaling up the amount and duration of understanding training improves generation benchmark performance (GenEval, ...), and vice versa (MMMU...). However, such broad benchmark scores cannot tell us whether a specific skill — like counting — is shared between image understanding and generation. We look at this directly, one capability at a time.
+      </p>
+
+      <div class="qa-block">
+        <div class="qa-card qa-question">
+          <span class="qa-tag">The Question</span>
+          <p>
+            In a UMM, if we sharpen a specific capability &mdash; say
+            <strong class="hl">counting</strong> &mdash; on the <em>understanding</em>
+            task alone, does <em>generation</em> of that capability improve too? And does
+            it work in reverse?
+          </p>
+        </div>
+        <div class="qa-card qa-answer">
+          <span class="qa-tag">Our Finding</span>
+          <p>
+            <strong>Yes &mdash; but it depends on the architecture.</strong> In our
+            experiments, such capability sharing (transferability) emerges most clearly on model which use <strong>shared transformer with an unified visual encoder</strong>.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ============== SECTION 1: ARCHITECTURE & TRANSFER ============== -->
+    <section id="section1" class="sec">
+      <div class="sec-label">ARCHITECTURE &amp; TRANSFER</div>
+      <h2 class="sec-heading">Architecture Analysis : In which UMM architecture does transfer emerge?</h2>
+
+      <br>
+      <div class="qa-card qa-answer">
+        <span class="qa-tag">Def. Of Transferability</span>
         <p>
-          <strong class="hl">Lip Forcing</strong> is the first autoregressive
-          diffusion model for V2V lip synchronization. It distills a
-          <strong>14B bidirectional teacher</strong> into two-step causal
-          students at 1.3B and 14B scales. The
-          <strong class="hl">1.3B student</strong> runs
-          <strong>17.6×</strong> faster than its same-scale bidirectional
-          counterpart, reaching <strong>31 FPS</strong> real-time on a
-          single GPU (H100), and the <strong class="hl">14B student</strong>
-          runs <strong>39.8×</strong> faster than its teacher at comparable
-          reference fidelity.
+        Train a specific capability (e.g., counting) on single task (understanding or
+            generation), then check whether the <strong>same capability
+            improves on the other task </strong>  &mdash; without ever training it there directly.
+
         </p>
       </div>
 
-      <!-- Stat strip — unique feature: glance-card row -->
-      <div class="stat-strip">
-        <div class="stat-card">
-          <div class="stat-num">31<span class="stat-unit"> FPS</span></div>
-          <div class="stat-label">Real-time on a single GPU (H100)</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">2<span class="stat-unit"> steps</span></div>
-          <div class="stat-label">At inference, no CFG</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">17.6<span class="stat-unit">× Speedup</span></div>
-          <div class="stat-label">1.3B causal student model vs. same-scale bidirectional model</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">39.8<span class="stat-unit">× Speedup</span></div>
-          <div class="stat-label">14B causal student model vs. same-scale bidirectional model</div>
-        </div>
+      
+      <div class="takeaway">
+        <span class="takeaway-key">Takeaway</span>
+        <p>
+          We empirically observe that <strong>transfer appears most clearly in architecture
+          (a) &mdash; a shared backbone with a unified encoder &mdash; </strong>
+          while other decoupled designs show little or no transfer. This may suggest that sharing
+          trasnformer backbone & input image representations helps capabilities transfer between tasks.
+        </p>
       </div>
-    </section>
 
-    <!-- ============== PREVIEW (horizontal scroll strip) ============== -->
-    <section id="preview" class="sec">
-      <div class="sec-label">PREVIEW</div>
-      <h2 class="sec-heading">Preview</h2>
-      <div class="preview-scroll" role="region" aria-label="Lip Forcing output preview row, scroll horizontally">
-        <div class="preview-track">
-          <figure class="preview-cell">
-            <video src="videos/preview/01.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/02.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/03.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/04.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/05.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/06.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/07.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/08.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-          <figure class="preview-cell">
-            <video src="videos/preview/09.mp4" controls preload="metadata" muted loop playsinline></video>
-          </figure>
-        </div>
-      </div>
-      <p class="cap">
-        Nine outputs from <strong>Lip Forcing (14B)</strong> on TalkVid. Hover near the left or right edge to pan the row.
-      </p>
-    </section>
-
-    <!-- ============== MOTIVATION ============== -->
-    <section id="motivation" class="sec">
-      <div class="sec-label">MOTIVATION</div>
-      <h2 class="sec-heading">The fidelity–sync tradeoff</h2>
-
-      <figure class="figure-wide">
-        <img src="assets/combined_analysis.png" alt="CFG fidelity-sync tradeoff: full trajectory analysis and 2x2 schedule factorial">
+      <h3 class="sub-heading">UMM Architecture families</h3>
+      <figure class="figure-wide figure-arch-wide">
+        <img src="assets/arch_categorize.png" alt="Five unified multimodal model architectures categorized into four types: (a) shared transformer with unified encoder, (b) shared transformer with separate encoders, (c) mixture-of-transformer, (d) separate transformer">
         <figcaption>
-          <strong>(a)</strong> Along the full 50-step trajectory of the 14B teacher,
-          classifier-free guidance (CFG, red) improves audio-visual sync but
-          worsens reference fidelity. No-CFG (navy) shows the inverse.
-          No fixed CFG scale optimizes both axes.
-          <strong>(b)</strong> An Euler-step 2×2 factorial over schedules
-          $(s_0, s_1)$ shows that mixed schedules recover most of the sync gap
-          when the second step lands near $j_1\!=\!30$.
+          <strong>Four UMM architecture families.</strong>
+          <strong>(a)</strong> Shared transformer + <em>unified</em> visual encoder (Lumina-DiMOO,
+          MMaDA) &nbsp;&nbsp; <strong>(b)</strong> Shared transformer + <em>separate</em>
+          visual encoders (Janus-Pro) &nbsp;&nbsp; <strong>(c)</strong> Mixture-of-transformer
+          (BAGEL) &nbsp;&nbsp; <strong>(d)</strong> Separate transformer (BLIP3-o).
         </figcaption>
       </figure>
 
-      <div class="text-block text-block-wide">
+
+      <div class="qa-card qa-question">
+        <span class="qa-tag">Experimental Settings</span>
+        <!-- <p class="sec-lead"> -->
         <p>
-          Diffusion lip-sync models exhibit a <strong>CFG fidelity-sync tradeoff</strong>:
-          classifier-free guidance lifts audio-visual synchronization but at the cost
-          of reference fidelity, and the two regimes do not coexist at any single CFG
-          scale. To distill this into a two-step student we run an Euler-step factorial
-          over $(s_0, s_1)\in\{1.0, 4.5\}^2$; the <strong>no-CFG&nbsp;→&nbsp;CFG</strong>
-          schedule lands near <strong class="hl">$\tau\!=\!0.769$</strong>
-          (~ODE step&nbsp;30) on the reference-leaning side of the joint
-          reference–sync optimum — reference fidelity close to the CFG=1.0
-          ceiling and sync close to the CFG=4.5 ceiling.
-          The remaining sync gap is closeable with explicit SyncNet supervision, while
-          the reference cost incurred by a guided first step is not. This selects the
-          <strong>operating point</strong> the student is trained to land on at
-          inference: a single landing at $\tau\!=\!0.769$ after one no-CFG velocity step
-          from $\tau\!=\!0.999$.
-        </p>
-      </div>
-    </section>
-
-    <!-- ============== METHOD ============== -->
-    <section id="method" class="sec">
-      <div class="sec-label">METHOD</div>
-      <h2 class="sec-heading">Overall framework</h2>
-
-      <div class="dual-figure">
-        <figure class="dual-fig-item">
-          <div class="dual-fig-tag">Framework</div>
-          <img src="assets/main_arch.png" alt="Lip Forcing architecture — Self-Forcing DMD distillation pipeline">
-        </figure>
-        <figure class="dual-fig-item">
-          <div class="dual-fig-tag">Speed vs. quality</div>
-          <img src="assets/pareto.png" alt="Pareto frontier — Lip Forcing dominates on speed-quality">
-        </figure>
-      </div>
-
-      <div class="text-block text-block-wide">
-        <p>
-          The 14B bidirectional teacher provides score / guidance targets along
-          a windowed schedule (<strong>Sync-Window DMD</strong>), while the causal
-          student uses chunk-wise sliding-window attention
-          (<code>sink=1, window=6</code>, total cache 7) to support autoregressive
-          inference at deployment. Trained this way, both Lip Forcing variants
-          land on the upper-right corner of the <strong class="hl">speed–quality
-          Pareto frontier</strong>: the 1.3B student reaches&nbsp;<strong>31 FPS</strong>
-          — past the 25 FPS real-time threshold — while the 14B
-          student delivers a&nbsp;<strong>4.7× throughput gain</strong> over
-          LatentSync at comparable reference fidelity. No prior method occupies
-          the upper-right region; the closest competitors trade off either
-          quality (Diff2Lip) or speed (LatentSync, OmniAvatar).
+          We select open-source model from each architecture family and evaluate their transferability.
+          We consider two transfer directions.
+            (1) <strong><em>und</em>&rarr;<em>gen</em></strong> : Train on understanding, test on generation.
+            (2) <strong><em>gen</em>&rarr;<em>und</em></strong> : Train on generation, test on understanding.
         </p>
       </div>
 
-      <div class="numbered-list numbered-list-3">
-        <div class="num-item">
-          <span class="num-mark">1</span>
-          <div>
-            <strong class="hl">Sync-Window DMD distillation.</strong>
-            Standard DMD applies teacher CFG uniformly. We instead gate it to
-            the sync-favoring band, derived from the trajectory analysis
-            (roughly steps&nbsp;$j\!\in\![20,40]$). The student learns when
-            guidance is useful and when it hurts.
-          </div>
-        </div>
-        <div class="num-item">
-          <span class="num-mark">2</span>
-          <div>
-            <strong class="hl">Two-step inference, no CFG.</strong>
-            At deployment, the student runs one no-CFG velocity step from
-            $\tau\!=\!0.999$ to a landing at $\tau\!=\!0.769$, then one final
-            denoising step to $\tau\!=\!0$. No classifier-free guidance is used
-            at inference.
-          </div>
-        </div>
-        <div class="num-item">
-          <span class="num-mark">3</span>
-          <div>
-            <strong class="hl">SyncNet reward.</strong>
-            An explicit SyncNet-based reward closes the residual sync gap
-            identified by the analysis.
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- ============== QUANTITATIVE ============== -->
-    <section id="results" class="sec">
-      <div class="sec-label">QUANTITATIVE</div>
-      <h2 class="sec-heading">Comparison on HDTF</h2>
-      <p class="sec-lead">
-        Throughput measured on a single H100. Best in
-        <strong>bold</strong>; second-best <u>underlined</u>.
-      </p>
-
+      <h3 class="sub-heading">Capability #1: Counting</h3>
       <div class="table-wrap">
         <table class="results-table">
           <thead>
             <tr>
-              <th class="th-left">Method</th>
-              <th>Steps</th>
-              <th>FPS&nbsp;↑</th>
-              <th>TTFF&nbsp;↓</th>
-              <th>Sync-C&nbsp;↑</th>
-              <th>Sync-D&nbsp;↓</th>
-              <th>CSIM&nbsp;↑</th>
-              <th>FID&nbsp;↓</th>
-              <th>FVD&nbsp;↓</th>
-              <th>SSIM&nbsp;↑</th>
+              <th rowspan="3">Eval</th>
+              <th rowspan="3">Train&rarr;Test</th>
+              <th class="grp grp-a" colspan="4">(a) Shared&nbsp;+&nbsp;Unified Encoder</th>
+              <th class="grp" colspan="2">(b) Separate Enc.</th>
+              <th class="grp" colspan="2">(c) MoT</th>
+              <th class="grp" colspan="2">(d) Separate Tr.</th>
+            </tr>
+            <tr>
+              <th class="grp-a" colspan="2">Lumina-DiMOO</th>
+              <th class="grp-a" colspan="2">MMaDA</th>
+              <th class="grp-sub" colspan="2">Janus-Pro</th>
+              <th class="grp-sub" colspan="2">BAGEL</th>
+              <th class="grp-sub" colspan="2">BLIP3-o</th>
+            </tr>
+            <tr>
+              <th class="grp-a">Acc&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
+              <th class="grp-a">Acc&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
             </tr>
           </thead>
           <tbody>
-            <tr class="row-gt">
-              <td class="th-left">Ground&nbsp;truth</td>
-              <td>—</td><td>—</td><td>—</td>
-              <td>7.95</td><td>6.92</td>
-              <td>—</td><td>—</td><td>—</td><td>—</td>
-            </tr>
-            <tr class="row-sep"></tr>
             <tr>
-              <td class="th-left">Diff2Lip</td>
-              <td>25</td><td>15.47</td><td>5.04</td>
-              <td><u>8.35</u></td><td><u>6.32</u></td>
-              <td>0.943</td><td>20.32</td><td>285.69</td><td>0.907</td>
-            </tr>
-            <tr>
-              <td class="th-left">LatentSync</td>
-              <td>20</td><td>3.23</td><td>6.29</td>
-              <td>8.10</td><td>6.51</td>
-              <td><strong>0.967</strong></td><td>6.90</td><td><u>117.91</u></td><td><strong>0.950</strong></td>
-            </tr>
-            <tr>
-              <td class="th-left">X-Dub</td>
-              <td>30</td><td>0.91</td><td>163.64</td>
-              <td>7.58</td><td>7.66</td>
-              <td>0.898</td><td>14.76</td><td>183.99</td><td>0.831</td>
-            </tr>
-            <tr class="row-sep"></tr>
-            <tr>
-              <td class="th-left">OmniAvatar&nbsp;LS (1.3B)</td>
-              <td>50</td><td>1.79</td><td>45.36</td>
-              <td>8.04</td><td>6.99</td>
-              <td>0.927</td><td>8.06</td><td>143.75</td><td>0.904</td>
-            </tr>
-            <tr>
-              <td class="th-left">OmniAvatar&nbsp;LS (14B)</td>
-              <td>50</td><td>0.38</td><td>213.72</td>
-              <td><strong>8.98</strong></td><td><strong>6.11</strong></td>
-              <td>0.934</td><td><strong>6.71</strong></td><td>133.87</td><td>0.911</td>
-            </tr>
-            <tr class="row-sep"></tr>
-            <tr>
-              <td class="th-left">Self&nbsp;Forcing (1.3B)</td>
-              <td>4</td><td><u>27.48</u></td><td><u>0.38</u></td>
-              <td>7.12</td><td>7.80</td>
-              <td>0.939</td><td>7.51</td><td>124.78</td><td>0.915</td>
+              <td class="eval-cell" rowspan="2">Generation</td>
+              <td >Baseline</td>
+              <td>48.0</td><td>1.11</td>
+              <td>15.8</td><td>3.44</td>
+              <td>38.0</td><td>1.46</td>
+              <td>42.0</td><td>1.16</td>
+              <td>31.0</td><td>2.08</td>
             </tr>
             <tr class="row-ours">
-              <td class="th-left"><strong>Lip Forcing (1.3B)</strong></td>
-              <td>2</td><td><strong>31.58</strong></td><td><strong>0.32</strong></td>
-              <td>6.88</td><td>7.93</td>
-              <td>0.943</td><td><u>6.76</u></td><td>118.86</td><td>0.919</td>
+              <td ><em>und</em>&rarr;<em>gen</em></td>
+              <td>57.0&nbsp;<span class="delta imp">+9.0</span></td><td>0.83&nbsp;<span class="delta imp">&minus;0.28</span></td>
+              <td>20.0&nbsp;<span class="delta imp">+4.2</span></td><td>3.23&nbsp;<span class="delta imp">&minus;0.21</span></td>
+              <td>32.0&nbsp;<span class="delta reg">&minus;6.0</span></td><td>1.55&nbsp;<span class="delta reg">+0.09</span></td>
+              <td>47.0&nbsp;<span class="delta imp">+5.0</span></td><td>1.11&nbsp;<span class="delta imp">&minus;0.05</span></td>
+              <td>37.0&nbsp;<span class="delta imp">+6.0</span></td><td>1.80&nbsp;<span class="delta imp">&minus;0.28</span></td>
+            </tr>
+            <tr class="row-sep"><td colspan="12"></td></tr>
+            <tr>
+              <td class="eval-cell" rowspan="2">Understanding</td>
+              <td >Baseline</td>
+              <td>22.0</td><td>2.48</td>
+              <td>38.7</td><td>1.16</td>
+              <td>37.0</td><td>2.70</td>
+              <td>63.0</td><td>0.65</td>
+              <td>63.0</td><td>0.54</td>
             </tr>
             <tr class="row-ours">
-              <td class="th-left"><strong>Lip Forcing (14B)</strong></td>
-              <td>2</td><td>15.11</td><td>0.54</td>
-              <td>7.59</td><td>7.23</td>
-              <td><u>0.949</u></td><td>7.01</td><td><strong>107.88</strong></td><td><u>0.938</u></td>
+              <td ><em>gen</em>&rarr;<em>und</em></td>
+              <td>30.0&nbsp;<span class="delta imp">+8.0</span></td><td>1.88&nbsp;<span class="delta imp">&minus;0.60</span></td>
+              <td>43.9&nbsp;<span class="delta imp">+5.2</span></td><td>1.07&nbsp;<span class="delta imp">&minus;0.09</span></td>
+              <td>38.0&nbsp;<span class="delta imp">+1.0</span></td><td>3.34&nbsp;<span class="delta reg">+0.64</span></td>
+              <td>64.0&nbsp;<span class="delta imp">+1.0</span></td><td>0.62&nbsp;<span class="delta imp">&minus;0.03</span></td>
+              <td>62.0&nbsp;<span class="delta reg">&minus;1.0</span></td><td>0.56&nbsp;<span class="delta reg">+0.02</span></td>
             </tr>
           </tbody>
         </table>
       </div>
       <p class="cap">
-        See the Pareto frontier in the <a href="#method">Method</a>
-        section for the speed-quality view of these numbers.
+        <!-- Accuracy&nbsp;(%)&nbsp;&uarr;, MAD&nbsp;&darr;; deltas vs. Baseline. -->
+         · MAD : <em>Mean Average Difference</em> between predicted and ground-truth counts. Lower is better. <br>
       </p>
+      
+
+
+      <h3 class="sub-heading">Capability #2: Spatial Relation</h3>
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th  rowspan="2">Eval</th>
+              <th rowspan="2">Train&rarr;Test</th>
+              <th class="grp grp-a" colspan="2">(a) Shared&nbsp;+&nbsp;Unified Encoder</th>
+            </tr>
+            <tr>
+              <th class="grp-a">Lumina-DiMOO&nbsp;Acc&nbsp;&uarr;</th>
+              <th class="grp-a">MMaDA&nbsp;Acc&nbsp;&uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="eval-cell" rowspan="2">Generation</td>
+              <td >Baseline</td>
+              <td>67.0</td>
+              <td>33.0</td>
+            </tr>
+            <tr class="row-ours">
+              <td ><em>und</em>&rarr;<em>gen</em></td>
+              <td>74.0&nbsp;<span class="delta imp">+7.0</span></td>
+              <td>46.3&nbsp;<span class="delta imp">+13.3</span></td>
+            </tr>
+            <tr class="row-sep"><td colspan="4"></td></tr>
+            <tr>
+              <td class="eval-cell" rowspan="2">Understanding</td>
+              <td >Baseline</td>
+              <td>61.0</td>
+              <td>40.8</td>
+            </tr>
+            <tr class="row-ours">
+              <td ><em>gen</em>&rarr;<em>und</em></td>
+              <td>67.0&nbsp;<span class="delta imp">+6.0</span></td>
+              <td>48.8&nbsp;<span class="delta imp">+8.0</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- <div class="qa-card qa-question">
+        <p>
+        Another example of transfer fully unified architecture (a) - shared transformer + unified visual encoder. Lumina-DiMOO &amp; MMaDA improve in both directions.
+        </p>
+      </div> -->
+
+      <div class="qa-card qa-question">
+        <span class="qa-tag">Interpretations</span>
+        <p>
+        Across both capabilities, <strong>(a)</strong> <strong class="hl">Models with a shared transformer and a unified visual encoder </strong> (Lumina-DiMOO & MMaDA) show improvements in both directions, <strong class="hl">exhibiting stronger bidirectional transfer</strong>. In contrast, <strong>(b)&mdash;(d)</strong> show weaker or no transfer.
+        </p>
+      </div>
+
     </section>
 
-    <!-- ============== QUALITATIVE — OURS ONLY ============== -->
-    <section id="qual-ours" class="sec">
-      <div class="sec-label">QUALITATIVE</div>
-      <h2 class="sec-heading">Lip Forcing in action</h2>
 
-      <div class="video-grid grid-3" id="qual-ours-grid">
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/01.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/02.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/03.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/04.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/05.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
-        <figure class="video-frame video-landscape">
-          <video src="videos/qual_ours/06.mp4" controls preload="metadata" muted loop playsinline></video>
-        </figure>
+    <!-- ============== SECTION 2: PRACTICAL RECIPE ============== -->
+    <section id="section2" class="sec">
+      <div class="sec-label">PRACTICAL RECIPE</div>
+      <h2 class="sec-heading">Can we add a generative capability without hurting image quality?</h2>
+
+      <div class="qa-block">
+        <div class="qa-card qa-question">
+          <span class="qa-tag">The Problem</span>
+          <p>
+            Want to boost a generative skill? Fine-tuning generation directly
+            (<em>gen</em>&rarr;<em>gen</em>) pulls the model toward the training set &mdash;
+            a <strong class="hl">distribution shift</strong> that can degrade image quality.
+          </p>
+        </div>
+        <div class="qa-card qa-answer">
+          <span class="qa-tag">The Recipe</span>
+          <p>
+            <strong>Train understanding, not generation.</strong> Let the capability
+            transfer (<em>und</em>&rarr;<em>gen</em>). In our experiments this improves the
+            target skill while keeping the generative distribution &mdash; and image quality
+            &mdash; closer to the original.
+          </p>
+        </div>
+      </div>
+      <div class="takeaway">
+        <span class="takeaway-key">Takeaway</span>
+        <p>
+          <em>und</em>&rarr;<em>gen</em> (Transfer) can <strong>improve target generative capabilities</strong> while <strong>
+            keeping image quality closer to the baseline (lower FID)</strong>. Direct training achieves better accuracy, but image distribution drifts much higher from the baseline (higher FID).
+        </p>
+      </div>
+
+      <h3 class="sub-heading">Transfer vs. Direct Training (Counting & Spatial Relation)</h3>
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th  rowspan="2">Capability</th>
+              <th rowspan="2">Train&rarr;Test</th>
+              <th colspan="2" class="grp">Task metric</th>
+              <th colspan="2" class="grp grp-a">Image quality</th>
+            </tr>
+            <tr>
+              <th>Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-a">IS&nbsp;&uarr;</th><th class="grp-a">FID&nbsp;&darr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="eval-cell" rowspan="3">Counting</td>
+              <td>Baseline</td>
+              <td>48.0</td><td>1.11</td><td>16.86</td><td>&mdash;</td>
+            </tr>
+            <tr class="row-ours">
+              <td><em>und</em>&rarr;<em>gen</em>&nbsp;(Transfer)</td>
+              <td>57.0&nbsp;<span class="delta imp">+9.0</span></td>
+              <td>0.83&nbsp;<span class="delta imp">&minus;0.28</span></td>
+              <td><strong>17.55</strong></td><td><strong>31.47</strong></td>
+            </tr>
+            <tr>
+              <td><em>gen</em>&rarr;<em>gen</em>&nbsp;(Direct)</td>
+              <td>57.0&nbsp;<span class="delta imp">+9.0</span></td>
+              <td>0.91&nbsp;<span class="delta imp">&minus;0.20</span></td>
+              <td>15.29</td><td>52.51</td>
+            </tr>
+            <tr class="row-sep"><td colspan="6"></td></tr>
+            <tr>
+              <td class="eval-cell" rowspan="3">Spatial Relation</td>
+              <td>Baseline</td>
+              <td>67.0</td><td>&mdash;</td><td>16.86</td><td>&mdash;</td>
+            </tr>
+            <tr class="row-ours">
+              <td><em>und</em>&rarr;<em>gen</em>&nbsp;(Transfer)</td>
+              <td>74.0&nbsp;<span class="delta imp">+7.0</span></td>
+              <td>&mdash;</td>
+              <td><strong>17.50</strong></td><td><strong>30.95</strong></td>
+            </tr>
+            <tr>
+              <td><em>gen</em>&rarr;<em>gen</em>&nbsp;(Direct)</td>
+              <td>80.0&nbsp;<span class="delta imp">+13.0</span></td>
+              <td>&mdash;</td>
+              <td>17.41</td><td>32.28</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <p class="cap">
+        <span class="cap-note">Counting: achieves same 57% accuracy,
+        but with much lower FID (31.5 vs. 52.5).</span>
+        <br>Spatial Relation: transfer trails direct training on
+        accuracy (+7 vs.&nbsp;+13&nbsp;pp) but keeps FID lower (30.95 vs. 32.28).
+      </p> -->
+
+      <div class="qa-card qa-question">
+        <span class="qa-tag">Interpretations</span>
+        <p>
+        For Counting, Transfer (und&rarr;gen) achieves <strong class="hl">same 57% accuracy</strong> compared to direct training (gen&rarr;gen),
+        but with <strong class="hl"> much lower FID (31.5 vs. 52.5)</strong>. For Spatial Relation, transfer trails direct training on
+        accuracy (+7 vs.&nbsp;+13&nbsp;pp) but keeps lower FID (30.95 vs. 32.28).
+        </p>
+      </div>
+
+    </section>
+
+    <!-- ============== SECTION 3: TRANSFER DIRECTION ============== -->
+    <section id="section3" class="sec">
+      <div class="sec-label">DISCUSSIONS</div>
+      <!-- <h2 class="sec-heading">When &amp; why does transfer work?</h2> -->
+      <h3 class="sub-heading">Is <em>und</em>&rarr;<em>gen</em> always the stronger direction?</h3>
+      <p class="sec-lead">
+        We measure <strong class="hl">transfer strength</strong> as the improvement from
+        transfer relative to direct training &mdash; e.g., <em>150%</em> means transfer
+        achieved 1.5&times; the improvement of direct training.
+      </p>
+      <div class="takeaway">
+        <span class="takeaway-key">Takeaway #2</span>
+        <p>
+          Not always. In our Lumina-DiMOO experiments, <em>und</em>&rarr;<em>gen</em> tends to be
+          stronger for counting and spatial relation, while <em>gen</em>&rarr;<em>und</em> tends to be stronger for text. We hypothesize this is because text depends on fine-grained, <strong>pixel-level detail</strong> &mdash; which the generation objective may capture more directly than understanding does.
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th  rowspan="2">Transfer Direction</th>
+              <th class="grp" colspan="2">Counting</th>
+              <th class="grp" colspan="1">Spatial Relation</th>
+              <th class="grp" colspan="3">Text Recog./Gen.</th>
+            </tr>
+            <tr>
+              <th>Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;&uarr;</th>
+              <th class="grp-sub">WER&nbsp;&darr;</th><th>METEOR&nbsp;&uarr;</th><th>F1&nbsp;&uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-ours">
+              <td ><em>und</em> &rarr; <em>gen</em></td>
+              <td><strong>100%</strong></td>
+              <td><strong>140%</strong></td>
+              <td><strong>53.8%</strong></td>
+              <td><strong>100%</strong></td>
+              <td>5.4%</td>
+              <td>7.6%</td>
+            </tr>
+            <tr>
+              <td ><em>gen</em> &rarr; <em>und</em></td>
+              <td>22.9%</td>
+              <td>37.7%</td>
+              <td>21.4%</td>
+              <td>28.9%</td>
+              <td><strong>27.6%</strong></td>
+              <td><strong>25.9%</strong></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
       <p class="cap">
-        Outputs from <strong>Lip Forcing (14B)</strong> on six clips from the
-        TalkVid test set. Unmute the controls to play with audio.
+        Transfer strength = &Delta;(transfer) / &Delta;(direct training).
+        <strong>Bold</strong> = dominant direction per metric.
       </p>
-    </section>
 
-    <!-- ============== QUALITATIVE vs BASELINES ============== -->
-    <section id="qual-vs" class="sec">
-      <div class="sec-label">VS. BASELINES</div>
-      <h2 class="sec-heading">Comparison with baselines</h2>
-
-      <!-- Testset arrow nav: cycles TalkVid → HDTF → Hallo3 → TalkVid -->
-      <div class="vs-testset-nav" role="tablist" aria-label="Choose a test set">
-        <button class="vs-tset-arrow" id="vs-tset-prev" aria-label="Previous test set">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <div class="vs-tset-display">
-          <span class="vs-tset-name" id="vs-tset-name">TalkVid</span>
-        </div>
-        <button class="vs-tset-arrow" id="vs-tset-next" aria-label="Next test set">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
+      <h3 class="sub-heading">Does existence of transferability guarantee simultaneous gains on joint training?</h3>
+      <div class="takeaway">
+        <span class="takeaway-key">Takeaway</span>
+        <p>
+          Not necessarily. When we trained <em>und</em>+<em>gen</em> together, the two did
+          not improve at the same time &mdash; understanding rose while generation fell,
+          then the trend reversed. This suggests that a transfer <em>path</em> existing
+          doesn&rsquo;t guarantee gains in both directions at once.
+        </p>
       </div>
-
-      <!-- Sample picker + Magnifier toggle -->
-      <div class="vs-controls">
-        <div class="vs-picker" role="tablist" aria-label="Choose a sample">
-          <button class="vs-pick-btn active" data-row="1" role="tab" aria-selected="true">
-            <span class="vs-pick-num">01</span><span class="vs-pick-text">Sample 1</span>
-          </button>
-          <button class="vs-pick-btn" data-row="2" role="tab" aria-selected="false">
-            <span class="vs-pick-num">02</span><span class="vs-pick-text">Sample 2</span>
-          </button>
-          <button class="vs-pick-btn" data-row="3" role="tab" aria-selected="false">
-            <span class="vs-pick-num">03</span><span class="vs-pick-text">Sample 3</span>
-          </button>
-        </div>
-        <label class="vs-zoom-toggle" title="Show a magnified loupe near the cursor">
-          <input type="checkbox" id="vs-zoom-input">
-          <span class="vs-zoom-slider" aria-hidden="true"></span>
-          <span class="vs-zoom-label">Magnifier</span>
-        </label>
-      </div>
-
-      <!-- 3×2 grid panels — 3 testsets × 3 samples = 9 panels.
-           Only the (active testset, active sample) panel is shown.
-           Cell order: Input | Ours | Wav2Lip / VideoReTalking | MuseTalk | LatentSync -->
-      <div class="vs-stage">
-
-        <!-- =============== TALKVID =============== -->
-        <div class="vs-grid-panel" data-testset="talkvid" data-row="1">
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/talkvid/row1/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/talkvid/row1/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row1/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row1/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row1/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row1/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="talkvid" data-row="2" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/talkvid/row2/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/talkvid/row2/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row2/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row2/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row2/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row2/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="talkvid" data-row="3" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/talkvid/row3/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/talkvid/row3/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row3/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row3/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row3/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/talkvid/row3/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <!-- =============== HDTF =============== -->
-        <div class="vs-grid-panel" data-testset="hdtf" data-row="1" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hdtf/row1/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hdtf/row1/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row1/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row1/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row1/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row1/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="hdtf" data-row="2" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hdtf/row2/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hdtf/row2/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row2/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row2/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row2/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row2/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="hdtf" data-row="3" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hdtf/row3/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hdtf/row3/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row3/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row3/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row3/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hdtf/row3/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <!-- =============== HALLO3 =============== -->
-        <div class="vs-grid-panel" data-testset="hallo3" data-row="1" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hallo3/row1/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hallo3/row1/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row1/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row1/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row1/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row1/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="hallo3" data-row="2" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hallo3/row2/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hallo3/row2/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row2/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row2/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row2/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row2/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-        <div class="vs-grid-panel" data-testset="hallo3" data-row="3" hidden>
-          <figure class="vs-cell vs-input">
-            <video src="videos/vs/hallo3/row3/input.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Input</figcaption>
-          </figure>
-          <figure class="vs-cell vs-cell-ours">
-            <video src="videos/vs/hallo3/row3/ours.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Ours (Lip Forcing)</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row3/wav2lip.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>Wav2Lip</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row3/videoretalking.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>VideoReTalking</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row3/musetalk.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>MuseTalk</figcaption>
-          </figure>
-          <figure class="vs-cell">
-            <video src="videos/vs/hallo3/row3/latentsync.mp4" controls preload="metadata" muted loop playsinline></video>
-            <figcaption>LatentSync</figcaption>
-          </figure>
-        </div>
-
-      </div>
-
-      <p class="cap" id="vs-cap">
-        <strong id="vs-cap-tset">TalkVid</strong> test clips. Use the arrows
-        above to switch test sets (TalkVid → HDTF → Hallo3) and the buttons
-        to pick a sample. Playback is synchronized across all six videos.
-      </p>
+      <figure class="figure-medium">
+        <img src="assets/joint_training.png" alt="Joint und+gen training on counting: understanding accuracy rises in the first half while generation falls, then the trend reverses — an oscillatory trade-off">
+        <figcaption>
+          <strong>Joint <em>und</em>+<em>gen</em> training on counting (Lumina-DiMOO).</strong>
+          <strong>(a)</strong> understanding and <strong>(b)</strong> generation accuracy
+          (blue) / MAD (red) over epochs. The two objectives improve in alternation rather
+          than together; one possible explanation is that understanding and generation
+          favour different alignment patterns, producing conflicting signals during joint
+          optimization.
+        </figcaption>
+      </figure>
     </section>
 
     <!-- ============== CITATION ============== -->
@@ -700,21 +491,19 @@
       <div class="sec-label">CITATION</div>
       <h2 class="sec-heading">BibTeX</h2>
       <div class="bib-wrap">
-        <pre class="bib"><code>@misc{cho2026lipforcingfewstepautoregressive,
-  title         = {Lip Forcing: Few-Step Autoregressive Diffusion for Real-time Lip Synchronization},
-  author        = {Paul Hyunbin Cho and Jinhyuk Jang and SeokYoung Lee and Joungbin Lee and Siyoon Jin and Heeseong Shin and Jung Yi and Yunjin Park and Chulmin Park and Seungryong Kim},
-  year          = {2026},
-  eprint        = {2606.11180},
-  archivePrefix = {arXiv},
-  primaryClass  = {cs.CV},
-  url           = {https://arxiv.org/abs/2606.11180}
+        <pre class="bib"><code>@inproceedings{kang2026transferability,
+  title     = {Transferability Between Understanding and Generation in Unified Multimodal Models},
+  author    = {Kang, Jiwon and Yoon, Heeji and Jung, Jaewoo and Min, Jaewon and
+               Jeon, Minkyeong and Hwang, Biyeon and Jung, Sangwon and Kim, Seungryong},
+  booktitle = {European Conference on Computer Vision (ECCV)},
+  year      = {2026}
 }</code></pre>
         <button class="copy-btn" id="copy-bib" aria-label="Copy BibTeX">Copy</button>
       </div>
     </section>
 
     <footer class="footer">
-      <p>Page rendered locally. Source layout adapted from common academic page conventions.</p>
+      <p>Project page for &ldquo;Transferability Between Understanding and Generation in Unified Multimodal Models&rdquo; (ECCV 2026).</p>
     </footer>
 
   </main>
