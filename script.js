@@ -88,6 +88,36 @@
   }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
   fadeTargets.forEach(t => fadeObserver.observe(t));
 
+  // ---------- Figure image-error state ----------
+  // If a content figure's image fails to load, swap it for a friendly
+  // fallback (line icon + "Figure unavailable") instead of a blank/collapsed box.
+  function markFigureError(img){
+    if(img.dataset.errored) return;
+    img.dataset.errored = '1';
+    const fallback = document.createElement('div');
+    fallback.className = 'figure-error';
+    fallback.setAttribute('role', 'img');
+    fallback.setAttribute('aria-label', img.alt ? ('Figure unavailable: ' + img.alt) : 'Figure unavailable');
+    fallback.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" ' +
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
+        '<rect x="3" y="3" width="18" height="18" rx="2"></rect>' +
+        '<circle cx="9" cy="9" r="1.4"></circle>' +
+        '<path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"></path>' +
+        '<line x1="3" y1="3" x2="21" y2="21"></line>' +
+      '</svg>' +
+      '<span>Figure unavailable</span>';
+    img.replaceWith(fallback);
+  }
+  const figImgs = document.querySelectorAll('.figure-wide img, .figure-medium img');
+  figImgs.forEach(img => {
+    img.addEventListener('error', () => markFigureError(img));
+    // Catch images that already failed before this script ran (cached errors)
+    if(img.complete && img.naturalWidth === 0 && img.getAttribute('src')){
+      markFigureError(img);
+    }
+  });
+
   // ---------- Figure lightbox (click any content figure to enlarge) ----------
   // Click an image to enlarge it as a centered overlay. Click the overlay,
   // press Escape, or click the close button to dismiss.
@@ -153,16 +183,28 @@
           copyBtn.textContent = 'Copy';
         }, 1600);
       };
+      // Help-not-blame: if copying is blocked, tell the user how to do it manually.
+      const fail = () => {
+        copyBtn.textContent = 'Press ⌘/Ctrl+C';
+        setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2200);
+      };
+      const legacyCopy = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'absolute';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        let ok = false;
+        try{ ok = document.execCommand('copy'); } catch(e){ ok = false; }
+        document.body.removeChild(ta);
+        ok ? done() : fail();
+      };
       if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text).then(done).catch(() => {
-          // fallback
-          const ta = document.createElement('textarea');
-          ta.value = text;
-          document.body.appendChild(ta);
-          ta.select();
-          try{ document.execCommand('copy'); done(); } catch(e){}
-          document.body.removeChild(ta);
-        });
+        navigator.clipboard.writeText(text).then(done).catch(legacyCopy);
+      } else {
+        legacyCopy();
       }
     });
   }

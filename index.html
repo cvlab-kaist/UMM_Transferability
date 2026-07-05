@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Transferability Between Understanding and Generation in Unified Multimodal Models</title>
 <meta name="description" content="Do capabilities transfer between understanding and generation in Unified Multimodal Models? We show cross-task transfer depends on architecture, and leverage it to improve generation by training understanding — while preserving image quality. ECCV 2026.">
 
@@ -145,7 +145,7 @@
 
       <h3 class="sub-heading">UMM Architecture families</h3>
       <figure class="figure-wide figure-arch-wide">
-        <img src="assets/arch_categorize.png" alt="Five unified multimodal model architectures categorized into four types: (a) shared transformer with unified encoder, (b) shared transformer with separate encoders, (c) mixture-of-transformer, (d) separate transformer">
+        <img src="assets/arch.png" alt="Four unified multimodal model architectures: (a) shared transformer with unified encoder, (b) shared transformer with separate encoders, (c) mixture-of-transformer, (d) separate transformer">
         <figcaption>
           <strong>Four UMM architecture families.</strong>
           <strong>(a)</strong> Shared transformer + <em>unified</em> visual encoder (Lumina-DiMOO,
@@ -308,17 +308,15 @@
         <div class="qa-card qa-question">
           <span class="qa-tag">The Problem</span>
           <p>
-            Want to boost a generative skill? Fine-tuning generation directly
-            (<em>gen</em>&rarr;<em>gen</em>) pulls the model toward the training set &mdash;
+            Want to boost a generative skill? Fine-tuning generation directly pulls the model toward the training set &mdash;
             a <strong class="hl">distribution shift</strong> that can degrade image quality.
           </p>
         </div>
         <div class="qa-card qa-answer">
           <span class="qa-tag">The Recipe</span>
           <p>
-            <strong>Train understanding, not generation.</strong> Let the capability
-            transfer (<em>und</em>&rarr;<em>gen</em>). In our experiments this improves the
-            target skill while keeping the generative distribution &mdash; and image quality
+            <strong>Train understanding, not generation.</strong> In our experiments this improves the
+            target generative skill while keeping the distribution &mdash; and image quality
             &mdash; closer to the original.
           </p>
         </div>
