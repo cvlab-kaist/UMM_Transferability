@@ -1,20 +1,20 @@
 /* =============================================================================
    UMM Transferability — Project Page Stylesheet
-   StyleSeed-compliant: one accent (refined violet), one radius personality (soft),
+   StyleSeed-compliant: one accent (muted slate-blue), one radius personality (soft),
    one shadow language (<=8%), one motion seed (Silk). Responsive from 320px up.
    ============================================================================= */
 
 /* ---------- Theme tokens ---------- */
 :root{
   /* Brand — single accent, tints only (no 2nd/3rd hue) */
-  --accent:        #6D28D9;   /* primary violet — links, active nav, .hl */
-  --accent-strong: #5B21B6;   /* darker violet — hover / emphasis text */
-  --accent-soft:   #F1EBFB;   /* tinted background for highlights */
+  --accent:        #3D5A80;   /* ink slate-blue — links, active nav, .hl */
+  --accent-strong: #2E4763;   /* darker slate — hover / emphasis text */
+  --accent-soft:   #EEF1F6;   /* cool-grey tint for highlights */
 
   /* Status — severity only; normal states stay grey */
-  --success: #0A8A3F;         /* confirmation (copy) */
-  --up:      #0A8A3F;         /* improvement / up trend */
-  --down:    #C0392B;         /* regression / down trend */
+  --success: #2E7D50;         /* confirmation (copy) */
+  --up:      #2E7D50;         /* improvement / up trend */
+  --down:    #B04A3C;         /* regression / down trend */
 
   /* Motion — Silk seed (one easing, three durations) */
   --ease:       cubic-bezier(0.4, 0, 0.2, 1);
@@ -23,15 +23,15 @@
   --dur-slow:   360ms;
   --motion:     var(--dur-normal) var(--ease);
 
-  /* Neutrals (no pure #000; darkest text = #1A1A24) */
-  --bg:          #FBFAFE;     /* page background (faint violet white) */
+  /* Neutrals (no pure #000; darkest text = #1B1D23) */
+  --bg:          #FCFCFD;     /* page background (neutral near-white) */
   --surface:     #FFFFFF;     /* cards / inset blocks */
-  --surface-2:   #F5F2FB;     /* second-level inset */
-  --text:        #1A1A24;     /* strong */
-  --text-soft:   #5A5A6C;     /* body / labels */
-  --text-mute:   #67677A;     /* captions (darkened for WCAG AA on near-white) */
-  --border:      #E7E3F2;
-  --border-soft: #F0EEF7;
+  --surface-2:   #F4F5F7;     /* second-level inset */
+  --text:        #1B1D23;     /* strong */
+  --text-soft:   #565A66;     /* body / labels */
+  --text-mute:   #6A6E7A;     /* captions (darkened for WCAG AA on near-white) */
+  --border:      #E3E5EA;
+  --border-soft: #EEF0F3;
 
   /* Typography */
   --font:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -50,8 +50,8 @@
   --radius-lg: 14px;   /* cards */
 
   /* Shadows — one language, <=8% opacity */
-  --shadow-1: 0 4px 18px rgba(40, 30, 70, 0.06);
-  --shadow-2: 0 12px 40px rgba(70, 50, 130, 0.08);
+  --shadow-1: 0 4px 18px rgba(20, 24, 40, 0.05);
+  --shadow-2: 0 12px 40px rgba(24, 28, 48, 0.07);
 }
 
 /* ---------- Base ---------- */
@@ -74,7 +74,7 @@ code{
   font-family:var(--font-mono); font-size:0.92em;
   background:var(--surface-2); padding:0.05em 0.4em; border-radius:var(--radius-sm);
 }
-.hl{ color:var(--accent); font-weight:600; }
+.hl{ color:var(--accent); font-weight:700; }
 
 /* ---------- Reading-progress bar ---------- */
 #progress-bar{
