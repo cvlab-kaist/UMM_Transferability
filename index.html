@@ -34,9 +34,9 @@
       <a href="#section3" class="nav-link" data-section="section3">Discussions</a>
       <a href="#citation" class="nav-link" data-section="citation">Citation</a>
     </nav>
-    <div class="sidebar-foot">
+    <!-- <div class="sidebar-foot">
       <span class="venue-badge">ECCV 2026</span>
-    </div>
+    </div> -->
   </aside>
 
   <!-- ============================== MAIN ============================== -->
@@ -48,7 +48,7 @@
       <!-- Centered title / authors / links block -->
       <div class="hero-head">
         <h1 class="hero-title">
-          <span class="hero-accent">Transferability</span> Between<br> Understanding &amp; Generation<br>
+          <span class="hero-accent">Transferability</span> Between Understanding &amp; Generation<br>
           <span class="hero-sub">in Unified Multimodal Models</span>
         </h1>
 
@@ -69,6 +69,11 @@
           <br>
           <span class="affil-foot"><sup>*</sup>Equal contribution &nbsp;&nbsp;·&nbsp;&nbsp; <sup>&dagger;</sup>Co-corresponding author</span>
         </p>
+        
+        <!-- 중앙 정렬 필요! -->
+        <p class="hero-lead" style="text-align:center; margin-bottom: 15px;">
+          <strong>ECCV 2026</strong>
+        </p>
 
         <div class="links-row">
           <a href="#" class="link-btn" target="_blank" rel="noopener">
@@ -88,28 +93,112 @@
         </div>
       </div>
 
-      <!-- Central question → finding, as cards -->
-      
-      <p class="hero-gap">
-      Earlier UMM studies generally report that scaling up the amount and duration of image understanding training improves generation benchmark performance (GenEval, ...), and vice versa (MMMU...). However, such broad benchmark scores cannot tell us whether a specific skill — like counting — is shared between image understanding and generation. We look at this directly, one capability at a time.
+
+
+      <!-- Promoted motivation lead — motivation + gap, ending by naming the concept
+           so the teaser figure below has a defined term ("transfer") to reference -->
+      <p class="hero-lead">
+        Prior UMM studies generally report that scaling up image understanding training benefits
+        generation benchmarks &mdash; and vice versa. But an aggregate benchmark score does not
+        tell us whether a <em>specific capability</em> &mdash; like
+        <strong class="hl">counting</strong> &mdash; is actually <em>shared</em> between
+        the two. So we probe it directly: we train a capability on just
+        <strong>one task</strong> (understanding or generation) and test whether it
+        improves on the <strong>other task</strong>, without ever training it there. We call
+        this <strong class="hl">transferability</strong>.
       </p>
 
+      <!-- Concept motif — bridges the lead into the teaser -->
+      <div class="transfer-motif" aria-hidden="true">
+        <span class="transfer-node">Understanding</span>
+        <svg class="transfer-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 5 3 9 7 13"></polyline>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <polyline points="17 11 21 15 17 19"></polyline>
+          <line x1="21" y1="15" x2="3" y2="15"></line>
+        </svg>
+        <span class="transfer-node">Generation</span>
+      </div>
+
+
+
+      <!-- Question → two-part finding, three equal columns -->
       <div class="qa-block">
         <div class="qa-card qa-question">
           <span class="qa-tag">The Question</span>
           <p>
             In a UMM, if we sharpen a specific capability &mdash; say
             <strong class="hl">counting</strong> &mdash; on the <em>understanding</em>
-            task alone, does <em>generation</em> of that capability improve too? And does
+            task alone, does that capability improve in <em>generation</em> too? And does
             it work in reverse?
           </p>
         </div>
         <div class="qa-card qa-answer">
-          <span class="qa-tag">Our Finding</span>
+          <span class="qa-tag"><span class="finding-num">1</span> Our Finding</span>
           <p>
-            <strong>Yes &mdash; but it depends on the architecture.</strong> In our
-            experiments, such capability sharing (transferability) emerges most clearly on model which use <strong>shared transformer with an unified visual encoder</strong>.
+            <strong>Transfer depends on architecture.</strong> It emerges most
+            clearly in models with a <strong>shared transformer and a unified visual
+            encoder</strong> (Lumina-DiMOO, MMaDA), and weakens as the architecture becomes more decoupled.
           </p>
+        </div>
+        <div class="qa-card qa-answer">
+          <span class="qa-tag"><span class="finding-num">2</span> Our Finding</span>
+          <p>
+            <strong>And it&rsquo;s useful.</strong> Training the <em>understanding</em>
+            task lets the capability transfer into <em>generation</em> &mdash; improving the
+            target capability while <strong>preserving image quality</strong> (far less
+            distribution shift than fine-tuning generation directly).
+          </p>
+        </div>
+      </div>
+
+      <!-- Teaser: architecture families (Takeaway #1) -->
+      <figure class="figure-wide hero-teaser">
+        <img src="assets/arch_homepage.png" alt="Four unified multimodal model architectures; cross-task transfer emerges most clearly in (a), a shared transformer with a unified visual encoder">
+        <figcaption>
+          Across four UMM architecture families, <strong>cross-task transfer emerges
+          most clearly in (a) &mdash; a shared transformer with a unified visual
+            encoder</strong>, and fades as the backbone and encoders decouple.
+          </figcaption>
+        </figure>
+
+      <!-- Qualitative results carousel (visual proof of finding #2) -->
+      <div class="hero-carousel" data-autoplay="true" data-interval="6000"
+           aria-roledescription="carousel" aria-label="Qualitative results: counting and spatial relation">
+        <div class="carousel-window">
+          <img class="carousel-slide is-active" src="assets/qual_counting_homepage.png"
+               alt="Counting: the baseline miscounts; training counting through understanding fixes the count and keeps the photo natural. Training generation also fixes the count but visibly degrades the image due to distribution shift towards the training dataset.">
+          <img class="carousel-slide" src="assets/qual_spatial_homepage.png"
+               alt="Spatial relation: the baseline gets the arrangement wrong; training through understanding corrects the layout with a realistic photo; training generation directly gets the layout but the objects look pasted onto a blank canvas">
+          <button class="carousel-arrow carousel-prev" type="button" aria-label="Previous example">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="carousel-arrow carousel-next" type="button" aria-label="Next example">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
+        </div>
+        <div class="carousel-caps">
+          <p class="carousel-cap is-active">
+            <strong>Counting.</strong> The prompt asks for a specific number of objects.
+            The original model miscounts (left). Training counting through
+            <span class="cap-und"> understanding</span> and letting it transfer to image
+            generation  <span class="cap-und">fixes the count</span> and <span class="cap-und">keeps the photo natural</span>
+            (middle, <span class="cap-und">Understanding</span>). Training the
+            <span class="cap-gen">generation directly</span> also fixes the count, but the image
+            <span class="cap-gen">visibly degrades</span> &mdash; stiff, cut-out subjects &mdash; due to <span class="cap-gen">distribution shift</span> towards the fine-tuning dataset. (right, <span class="cap-gen">Generation</span>).
+          </p>
+          <p class="carousel-cap">
+            <strong>Spatial relation.</strong> The prompt places one object relative to
+            another (e.g., the wine glass at the bottom-right of the kite). The baseline
+            often gets the arrangement wrong (left). Training spatial relation through
+            <span class="cap-und">understanding corrects the layout</span> while  <span class="cap-und">keeping a
+            original generative distribution</span> (middle, <span class="cap-und">Understanding</span>); training
+            <span class="cap-gen">generation directly</span> also corrects the layout but exhibits degraded visual quality due to <span class="cap-gen">distribution shift</span> towards the fine-tuning dataset. (right, <span class="cap-gen">Generation</span>).
+          </p>
+        </div>
+        <div class="carousel-dots">
+          <button class="carousel-dot is-active" type="button" aria-label="Show counting example"></button>
+          <button class="carousel-dot" type="button" aria-label="Show spatial relation example"></button>
         </div>
       </div>
 
@@ -121,15 +210,7 @@
       <h2 class="sec-heading">Architecture Analysis : In which UMM architecture does transfer emerge?</h2>
 
       <br>
-      <div class="qa-card qa-answer">
-        <span class="qa-tag">Def. Of Transferability</span>
-        <p>
-        Train a specific capability (e.g., counting) on single task (understanding or
-            generation), then check whether the <strong>same capability
-            improves on the other task </strong>  &mdash; without ever training it there directly.
 
-        </p>
-      </div>
 
       
       <div class="takeaway">
@@ -144,7 +225,7 @@
 
       <h3 class="sub-heading">UMM Architecture families</h3>
       <figure class="figure-wide figure-arch-wide">
-        <img src="assets/arch_homepage.png" alt="Four unified multimodal model architectures: (a) shared transformer with unified encoder, (b) shared transformer with separate encoders, (c) mixture-of-transformer, (d) separate transformer">
+        <img src="assets/arch.png" alt="Four unified multimodal model architectures: (a) shared transformer with unified encoder, (b) shared transformer with separate encoders, (c) mixture-of-transformer, (d) separate transformer">
         <figcaption>
           <strong>Four UMM architecture families.</strong>
           <strong>(a)</strong> Shared transformer + <em>unified</em> visual encoder (Lumina-DiMOO,
@@ -169,7 +250,7 @@
 
       <h3 class="sub-heading">Capability #1: Counting</h3>
       <div class="table-wrap">
-        <table class="results-table">
+        <table class="results-table" id="counting-table">
           <thead>
             <tr>
               <th rowspan="3">Eval</th>
@@ -187,11 +268,11 @@
               <th class="grp-sub" colspan="2">BLIP3-o</th>
             </tr>
             <tr>
-              <th class="grp-a">Acc&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
-              <th class="grp-a">Acc&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
-              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
-              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
-              <th class="grp-sub">Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-a">Acc&nbsp;(%)&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
+              <th class="grp-a">Acc&nbsp;(%)&nbsp;&uarr;</th><th class="grp-a">MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
             </tr>
           </thead>
           <tbody>
@@ -205,9 +286,9 @@
               <td>31.0</td><td>2.08</td>
             </tr>
             <tr class="row-ours">
-              <td ><em>und</em>&rarr;<em>gen</em></td>
-              <td>57.0&nbsp;<span class="delta imp">+9.0</span></td><td>0.83&nbsp;<span class="delta imp">&minus;0.28</span></td>
-              <td>20.0&nbsp;<span class="delta imp">+4.2</span></td><td>3.23&nbsp;<span class="delta imp">&minus;0.21</span></td>
+              <td class="grp-a"><em>und</em>&rarr;<em>gen</em></td>
+              <td class="grp-a">57.0&nbsp;<span class="delta imp ours">+9.0</span></td><td class="grp-a">0.83&nbsp;<span class="delta imp ours">&minus;0.28</span></td>
+              <td class="grp-a">20.0&nbsp;<span class="delta imp ours">+4.2</span></td><td class="grp-a">3.23&nbsp;<span class="delta imp ours">&minus;0.21</span></td>
               <td>32.0&nbsp;<span class="delta reg">&minus;6.0</span></td><td>1.55&nbsp;<span class="delta reg">+0.09</span></td>
               <td>47.0&nbsp;<span class="delta imp">+5.0</span></td><td>1.11&nbsp;<span class="delta imp">&minus;0.05</span></td>
               <td>37.0&nbsp;<span class="delta imp">+6.0</span></td><td>1.80&nbsp;<span class="delta imp">&minus;0.28</span></td>
@@ -223,9 +304,9 @@
               <td>63.0</td><td>0.54</td>
             </tr>
             <tr class="row-ours">
-              <td ><em>gen</em>&rarr;<em>und</em></td>
-              <td>30.0&nbsp;<span class="delta imp">+8.0</span></td><td>1.88&nbsp;<span class="delta imp">&minus;0.60</span></td>
-              <td>43.9&nbsp;<span class="delta imp">+5.2</span></td><td>1.07&nbsp;<span class="delta imp">&minus;0.09</span></td>
+              <td class="grp-a"><em>gen</em>&rarr;<em>und</em></td>
+              <td class="grp-a">30.0&nbsp;<span class="delta imp ours">+8.0</span></td><td class="grp-a">1.88&nbsp;<span class="delta imp ours">&minus;0.60</span></td>
+              <td class="grp-a">43.9&nbsp;<span class="delta imp ours">+5.2</span></td><td class="grp-a">1.07&nbsp;<span class="delta imp ours">&minus;0.09</span></td>
               <td>38.0&nbsp;<span class="delta imp">+1.0</span></td><td>3.34&nbsp;<span class="delta reg">+0.64</span></td>
               <td>64.0&nbsp;<span class="delta imp">+1.0</span></td><td>0.62&nbsp;<span class="delta imp">&minus;0.03</span></td>
               <td>62.0&nbsp;<span class="delta reg">&minus;1.0</span></td><td>0.56&nbsp;<span class="delta reg">+0.02</span></td>
@@ -250,8 +331,8 @@
               <th class="grp grp-a" colspan="2">(a) Shared&nbsp;+&nbsp;Unified Encoder</th>
             </tr>
             <tr>
-              <th class="grp-a">Lumina-DiMOO&nbsp;Acc&nbsp;&uarr;</th>
-              <th class="grp-a">MMaDA&nbsp;Acc&nbsp;&uarr;</th>
+              <th class="grp-a">Lumina-DiMOO&nbsp;Acc (%)&nbsp;&uarr;</th>
+              <th class="grp-a">MMaDA&nbsp;Acc (%)&nbsp;&uarr;</th>
             </tr>
           </thead>
           <tbody>
@@ -303,11 +384,11 @@
       <div class="sec-label">PRACTICAL RECIPE</div>
       <h2 class="sec-heading">Can we add a generative capability without hurting image quality?</h2>
 
-      <div class="qa-block">
+      <div class="qa-pair">
         <div class="qa-card qa-question">
           <span class="qa-tag">The Problem</span>
           <p>
-            Want to boost a generative skill? Fine-tuning generation directly pulls the model toward the training set &mdash;
+            Want to boost a generative capability? Fine-tuning generation directly pulls the model toward the training set &mdash;
             a <strong class="hl">distribution shift</strong> that can degrade image quality.
           </p>
         </div>
@@ -315,7 +396,7 @@
           <span class="qa-tag">The Recipe</span>
           <p>
             <strong>Train understanding, not generation.</strong> In our experiments this improves the
-            target generative skill while keeping the distribution &mdash; and image quality
+            target generative capability while keeping the distribution &mdash; and image quality
             &mdash; closer to the original.
           </p>
         </div>
@@ -419,7 +500,7 @@
       <div class="takeaway">
         <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#3</span></span>
         <p>
-          Not always. In our Lumina-DiMOO experiments, <em>und</em>&rarr;<em>gen</em> tends to be
+          <strong>Not always</strong>. In our Lumina-DiMOO experiments, <em>und</em>&rarr;<em>gen</em> tends to be
           stronger for counting and spatial relation, while <em>gen</em>&rarr;<em>und</em> tends to be stronger for text capability. We hypothesize this is because text depends on fine-grained, <strong>pixel-level detail</strong> &mdash; which the generation objective may capture more directly than understanding does.
         </p>
       </div>
@@ -434,8 +515,8 @@
               <th class="grp" colspan="3">Text Recog./Gen.</th>
             </tr>
             <tr>
-              <th>Acc&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
-              <th class="grp-sub">Acc&nbsp;&uarr;</th>
+              <th>Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
+              <th class="grp-sub">Acc&nbsp;(%)&nbsp;&uarr;</th>
               <th class="grp-sub">WER&nbsp;&darr;</th><th>METEOR&nbsp;&uarr;</th><th>F1&nbsp;&uarr;</th>
             </tr>
           </thead>
@@ -470,7 +551,7 @@
       <div class="takeaway">
         <span class="takeaway-key">Takeaway<br><span class="takeaway-num">#4</span></span>
         <p>
-          Not necessarily. When we trained <em>und</em>+<em>gen</em> together, the two did
+          <strong>Not necessarily</strong>. When we trained <em>und</em>+<em>gen</em> together, the two did
           not improve at the same time &mdash; understanding rose while generation fell,
           then the trend reversed. This suggests that a transfer <em>path</em> existing
           doesn&rsquo;t guarantee gains in both directions at once.
@@ -481,10 +562,7 @@
         <figcaption>
           <strong>Joint <em>und</em>+<em>gen</em> training on counting (Lumina-DiMOO).</strong>
           <strong>(a)</strong> understanding and <strong>(b)</strong> generation accuracy
-          (blue) / MAD (red) over epochs. The two objectives improve in alternation rather
-          than together: Understanding accuracy increases in the first half of training while generation accuracy declines, and the trend reverses in the latter half. One possible explanation is that understanding and generation
-          favour different alignment patterns, producing conflicting signals during joint
-          optimization.
+          (blue) / MAD (red) over epochs. The two objectives improve in alternation rather than together: Understanding accuracy/MAD improves in the first half of training while generation accuracy/MAD getting worse, and the trend reverses in the latter half. One possible explanation is that understanding and generation favour different alignment patterns, producing conflicting signals during joint optimization.
         </figcaption>
       </figure>
     </section>

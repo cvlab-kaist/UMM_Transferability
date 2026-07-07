@@ -118,10 +118,77 @@
     }
   });
 
+  // ---------- Hero qualitative carousel ----------
+  // Crossfading slides with prev/next arrows + dots. Autoplay is ON by default
+  // (data-autoplay), but never runs under prefers-reduced-motion, and pauses on
+  // hover / focus-within / hidden tab / open lightbox.
+  const carousels = [];
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  document.querySelectorAll('.hero-carousel').forEach(root => {
+    const slides = Array.from(root.querySelectorAll('.carousel-slide'));
+    const caps   = Array.from(root.querySelectorAll('.carousel-cap'));
+    const dots   = Array.from(root.querySelectorAll('.carousel-dot'));
+    const prev   = root.querySelector('.carousel-prev');
+    const next   = root.querySelector('.carousel-next');
+    if(slides.length < 2) return;   // nothing to cycle
+
+    let index = slides.findIndex(s => s.classList.contains('is-active'));
+    if(index < 0) index = 0;
+
+    const interval = parseInt(root.dataset.interval, 10) || 6000;
+    const wantsAutoplay = root.dataset.autoplay === 'true' && !prefersReduced.matches;
+    let timer = null, hovered = false, focused = false, lightboxOpen = false;
+
+    function render(){
+      slides.forEach((s, i) => s.classList.toggle('is-active', i === index));
+      caps.forEach((c, i)   => c.classList.toggle('is-active', i === index));
+      dots.forEach((d, i) => {
+        const on = i === index;
+        d.classList.toggle('is-active', on);
+        d.setAttribute('aria-current', on ? 'true' : 'false');
+      });
+    }
+    function goTo(i){ index = (i + slides.length) % slides.length; render(); }
+    const nextSlide = () => goTo(index + 1);
+    const prevSlide = () => goTo(index - 1);
+
+    function canPlay(){
+      return wantsAutoplay && !hovered && !focused && !lightboxOpen && !document.hidden;
+    }
+    function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+    function start(){ stop(); if(canPlay()){ timer = setInterval(nextSlide, interval); } }
+
+    if(next) next.addEventListener('click', () => { nextSlide(); start(); });
+    if(prev) prev.addEventListener('click', () => { prevSlide(); start(); });
+    dots.forEach((d, i) => d.addEventListener('click', () => { goTo(i); start(); }));
+
+    root.addEventListener('mouseenter', () => { hovered = true; stop(); });
+    root.addEventListener('mouseleave', () => { hovered = false; start(); });
+    root.addEventListener('focusin',  () => { focused = true; stop(); });
+    root.addEventListener('focusout', () => { focused = false; start(); });
+    root.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); prevSlide(); start(); }
+      else if(e.key === 'ArrowRight'){ e.preventDefault(); nextSlide(); start(); }
+    });
+
+    carousels.push({
+      pause(){ lightboxOpen = true; stop(); },
+      resume(){ lightboxOpen = false; start(); },
+      sync(){ start(); }
+    });
+
+    render();
+    start();
+  });
+
+  // Pause/resume autoplay as the tab visibility changes
+  document.addEventListener('visibilitychange', () => carousels.forEach(c => c.sync()));
+
   // ---------- Figure lightbox (click any content figure to enlarge) ----------
   // Click an image to enlarge it as a centered overlay. Click the overlay,
   // press Escape, or click the close button to dismiss.
-  const zoomImgs = document.querySelectorAll('.figure-wide img, .figure-medium img, .dual-fig-item img');
+  const zoomImgs = document.querySelectorAll('.figure-wide img, .figure-medium img, .dual-fig-item img, .carousel-slide');
   if(zoomImgs.length){
     const overlay = document.createElement('div');
     overlay.className = 'lightbox-overlay';
@@ -137,11 +204,13 @@
       overlay.classList.add('visible');
       overlay.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
+      carousels.forEach(c => c.pause());
     }
     function closeLightbox(){
       overlay.classList.remove('visible');
       overlay.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
+      carousels.forEach(c => c.resume());
     }
 
     zoomImgs.forEach(img => {
