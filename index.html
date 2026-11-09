@@ -250,13 +250,20 @@
 
 
       <h3 class="sub-heading">Capability #1: Counting</h3>
-      <div class="table-wrap">
+      <figure class="figure-wide image-table image-table--counting">
+        <img class="image-table-media image-table-media--counting"
+             src="assets/table_architecture_counting.svg"
+             width="1180" height="364"
+             alt="Counting transfer results for Lumina-DiMOO, MMaDA, Janus-Pro, BAGEL, and BLIP3-o. MMaDA generation accuracy rises from 16.0% to 20.0% after understanding training; understanding accuracy rises from 39.0% to 44.0% after generation training. MMaDA accuracies are rounded to whole percentages.">
+      </figure>
+      <div class="sr-only">
+        <div class="table-wrap table-wrap--data">
         <table class="results-table" id="counting-table">
           <thead>
             <tr>
-              <th rowspan="3">Eval</th>
+              <th rowspan="3">Task</th>
               <th rowspan="3">Train&rarr;Test</th>
-              <th class="grp grp-a" colspan="4">(a) Shared&nbsp;+&nbsp;Unified Encoder</th>
+              <th class="grp grp-a" colspan="4">(a) Shared Tr. + Unified Enc.</th>
               <th class="grp" colspan="2">(b) Separate Enc.</th>
               <th class="grp" colspan="2">(c) MoT</th>
               <th class="grp" colspan="2">(d) Separate Tr.</th>
@@ -281,7 +288,7 @@
               <td class="eval-cell" rowspan="2">Generation</td>
               <td >Baseline</td>
               <td>48.0</td><td>1.11</td>
-              <td>15.8</td><td>3.44</td>
+              <td>16.0</td><td>3.44</td>
               <td>38.0</td><td>1.46</td>
               <td>42.0</td><td>1.16</td>
               <td>31.0</td><td>2.08</td>
@@ -289,8 +296,8 @@
             <tr class="row-ours">
               <td class="grp-a"><em>und</em>&rarr;<em>gen</em></td>
               <td class="grp-a">57.0&nbsp;<span class="delta imp ours">+9.0</span></td><td class="grp-a">0.83&nbsp;<span class="delta imp ours">&minus;0.28</span></td>
-              <td class="grp-a">20.0&nbsp;<span class="delta imp ours">+4.2</span></td><td class="grp-a">3.23&nbsp;<span class="delta imp ours">&minus;0.21</span></td>
-              <td>32.0&nbsp;<span class="delta reg">&minus;6.0</span></td><td>1.55&nbsp;<span class="delta reg">+0.09</span></td>
+              <td class="grp-a">20.0&nbsp;<span class="delta imp ours">+4.0</span></td><td class="grp-a">3.23&nbsp;<span class="delta imp ours">&minus;0.21</span></td>
+              <td>32.0&nbsp;<span class="delta reg">−6.0</span></td><td>1.55&nbsp;<span class="delta reg">+0.09</span></td>
               <td>47.0&nbsp;<span class="delta imp">+5.0</span></td><td>1.11&nbsp;<span class="delta imp">&minus;0.05</span></td>
               <td>37.0&nbsp;<span class="delta imp">+6.0</span></td><td>1.80&nbsp;<span class="delta imp">&minus;0.28</span></td>
             </tr>
@@ -299,7 +306,7 @@
               <td class="eval-cell" rowspan="2">Understanding</td>
               <td >Baseline</td>
               <td>22.0</td><td>2.48</td>
-              <td>38.7</td><td>1.16</td>
+              <td>39.0</td><td>1.16</td>
               <td>37.0</td><td>2.70</td>
               <td>63.0</td><td>0.65</td>
               <td>63.0</td><td>0.54</td>
@@ -307,62 +314,78 @@
             <tr class="row-ours">
               <td class="grp-a"><em>gen</em>&rarr;<em>und</em></td>
               <td class="grp-a">30.0&nbsp;<span class="delta imp ours">+8.0</span></td><td class="grp-a">1.88&nbsp;<span class="delta imp ours">&minus;0.60</span></td>
-              <td class="grp-a">43.9&nbsp;<span class="delta imp ours">+5.2</span></td><td class="grp-a">1.07&nbsp;<span class="delta imp ours">&minus;0.09</span></td>
+              <td class="grp-a">44.0&nbsp;<span class="delta imp ours">+5.0</span></td><td class="grp-a">1.07&nbsp;<span class="delta imp ours">&minus;0.09</span></td>
               <td>38.0&nbsp;<span class="delta imp">+1.0</span></td><td>3.34&nbsp;<span class="delta reg">+0.64</span></td>
               <td>64.0&nbsp;<span class="delta imp">+1.0</span></td><td>0.62&nbsp;<span class="delta imp">&minus;0.03</span></td>
-              <td>62.0&nbsp;<span class="delta reg">&minus;1.0</span></td><td>0.56&nbsp;<span class="delta reg">+0.02</span></td>
+              <td>62.0&nbsp;<span class="delta reg">−1.0</span></td><td>0.56&nbsp;<span class="delta reg">+0.02</span></td>
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
       <p class="cap">
         <!-- Accuracy&nbsp;(%)&nbsp;&uarr;, MAD&nbsp;&darr;; deltas vs. Baseline. -->
          · MAD : <em>Mean Average Deviation</em> between predicted and ground-truth counts. Lower is better. <br>
+         · MMaDA Acc is rounded to whole percentages; Acc gains use the rounded values.
       </p>
       
 
 
       <h3 class="sub-heading">Capability #2: Spatial Relation</h3>
-      <div class="table-wrap">
-        <table class="results-table results-table--sm">
+      <figure class="figure-wide image-table image-table--compact">
+        <img class="image-table-media image-table-media--spatial"
+             src="assets/table_spatial_relation.svg"
+             width="1000" height="340"
+             alt="Spatial relation results for Lumina-DiMOO and MMaDA. Both models improve in generation and understanding after cross-task transfer.">
+      </figure>
+      <div class="sr-only">
+        <div class="table-wrap table-wrap--data">
+        <table class="results-table results-table--sm results-table--spatial">
           <thead>
             <tr>
-              <th  rowspan="2">Eval</th>
-              <th rowspan="2">Train&rarr;Test</th>
-              <th class="grp grp-a" colspan="2">(a) Shared&nbsp;+&nbsp;Unified Encoder</th>
+              <th rowspan="3">Task</th>
+              <th rowspan="3">Train&rarr;Test</th>
+              <th class="grp grp-a" colspan="2">(a) Shared Tr. + Unified Enc.</th>
             </tr>
             <tr>
-              <th class="grp-a">Lumina-DiMOO&nbsp;Acc (%)&nbsp;&uarr;</th>
-              <th class="grp-a">MMaDA&nbsp;Acc (%)&nbsp;&uarr;</th>
+              <th class="grp-a">Lumina-DiMOO</th>
+              <th class="grp-a">MMaDA</th>
+            </tr>
+            <tr>
+              <th class="grp-a">Acc (%)&nbsp;&uarr;</th>
+              <th class="grp-a">Acc (%)&nbsp;&uarr;</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="eval-cell" rowspan="2">Generation</td>
               <td >Baseline</td>
-              <td>67.0</td>
-              <td>33.0</td>
+              <td class="metric-cell">67.0</td>
+              <td class="metric-cell">33.0</td>
             </tr>
             <tr class="row-ours">
               <td ><em>und</em>&rarr;<em>gen</em></td>
-              <td>74.0&nbsp;<span class="delta imp">+7.0</span></td>
-              <td>46.3&nbsp;<span class="delta imp">+13.3</span></td>
+              <td class="metric-cell">74.0&nbsp;<span class="delta imp">+7.0</span></td>
+              <td class="metric-cell">46.0&nbsp;<span class="delta imp">+13.0</span></td>
             </tr>
             <tr class="row-sep"><td colspan="4"></td></tr>
             <tr>
               <td class="eval-cell" rowspan="2">Understanding</td>
               <td >Baseline</td>
-              <td>61.0</td>
-              <td>40.8</td>
+              <td class="metric-cell">61.0</td>
+              <td class="metric-cell">41.0</td>
             </tr>
             <tr class="row-ours">
               <td ><em>gen</em>&rarr;<em>und</em></td>
-              <td>67.0&nbsp;<span class="delta imp">+6.0</span></td>
-              <td>48.8&nbsp;<span class="delta imp">+8.0</span></td>
+              <td class="metric-cell">67.0&nbsp;<span class="delta imp">+6.0</span></td>
+              <td class="metric-cell">49.0&nbsp;<span class="delta imp">+8.0</span></td>
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
+
+      <p class="cap">MMaDA Acc is rounded to whole percentages; Acc gains use the rounded values.</p>
 
       <!-- <div class="qa-card qa-question">
         <p>
@@ -411,14 +434,21 @@
       </div>
 
       <h3 class="sub-heading">Transfer vs. Direct Training (Counting & Spatial Relation)</h3>
-      <div class="table-wrap">
-        <table class="results-table">
+      <figure class="figure-wide image-table image-table--direct">
+        <img class="image-table-media image-table-media--direct"
+             src="assets/table_transfer_vs_direct.svg"
+             width="1000" height="424"
+             alt="Comparison of baseline, understanding-to-generation transfer, and direct generation training for counting and spatial relation, including capability and image-quality metrics">
+      </figure>
+      <div class="sr-only">
+        <div class="table-wrap table-wrap--data">
+        <table class="results-table results-table--direct">
           <thead>
             <tr>
               <th  rowspan="2">Capability</th>
               <th rowspan="2">Train&rarr;Test</th>
-              <th colspan="2" class="grp">Task metric</th>
-              <th colspan="2" class="grp grp-a">Image quality</th>
+              <th colspan="2" class="grp">Capability Metric</th>
+              <th colspan="2" class="grp grp-a">Image Quality</th>
             </tr>
             <tr>
               <th>Acc&nbsp;(%)&nbsp;&uarr;</th><th>MAD&nbsp;&darr;</th>
@@ -437,7 +467,7 @@
               <td>0.83&nbsp;<span class="delta imp">&minus;0.28</span></td>
               <td><strong>17.55</strong></td><td><strong>31.47</strong></td>
             </tr>
-            <tr>
+            <tr class="row-direct">
               <td><em>gen</em>&rarr;<em>gen</em>&nbsp;(Direct)</td>
               <td>57.0&nbsp;<span class="delta imp">+9.0</span></td>
               <td>0.91&nbsp;<span class="delta imp">&minus;0.20</span></td>
@@ -455,7 +485,7 @@
               <td>&mdash;</td>
               <td><strong>17.50</strong></td><td><strong>30.95</strong></td>
             </tr>
-            <tr>
+            <tr class="row-direct">
               <td><em>gen</em>&rarr;<em>gen</em>&nbsp;(Direct)</td>
               <td>80.0&nbsp;<span class="delta imp">+13.0</span></td>
               <td>&mdash;</td>
@@ -463,9 +493,10 @@
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
       <!-- <p class="cap">
-        <span class="cap-note">Counting: achieves same 57% accuracy,
+        <span class="cap-note">Counting: achieves same 57.0% accuracy,
         but with much lower FID (31.5 vs. 52.5).</span>
         <br>Spatial Relation: transfer trails direct training on
         accuracy (+7 vs.&nbsp;+13&nbsp;pp) but keeps FID lower (30.95 vs. 32.28).
@@ -480,7 +511,7 @@
       <div class="qa-card qa-question">
         <span class="qa-tag">Interpretations</span>
         <p>
-        For Counting, Transfer (und&rarr;gen) achieves <strong class="hl">same 57% accuracy</strong> compared to direct training (gen&rarr;gen),
+        For Counting, Transfer (und&rarr;gen) achieves <strong class="hl">same 57.0% accuracy</strong> compared to direct training (gen&rarr;gen),
         but with <strong class="hl"> much lower FID (31.5 vs. 52.5)</strong>. For Spatial Relation, transfer trails direct training on
         accuracy (+7 vs.&nbsp;+13&nbsp;pp) but keeps lower FID (30.95 vs. 32.28).
         </p>
@@ -506,7 +537,14 @@
         </p>
       </div>
 
-      <div class="table-wrap">
+      <figure class="figure-wide image-table image-table--strength">
+        <img class="image-table-media image-table-media--strength"
+             src="assets/table_transfer_strength.svg"
+             width="1000" height="192"
+             alt="Transfer strength by direction for counting, spatial relation, and text recognition or generation. Understanding-to-generation is stronger for counting and spatial relation; generation-to-understanding is stronger for text.">
+      </figure>
+      <div class="sr-only">
+        <div class="table-wrap table-wrap--data">
         <table class="results-table">
           <thead>
             <tr>
@@ -526,22 +564,23 @@
               <td ><em>und</em> &rarr; <em>gen</em></td>
               <td><strong>100%</strong></td>
               <td><strong>140%</strong></td>
-              <td><strong>53.8%</strong></td>
+              <td><strong>53.80%</strong></td>
               <td><strong>100%</strong></td>
-              <td>5.4%</td>
-              <td>7.6%</td>
+              <td>5.40%</td>
+              <td>7.60%</td>
             </tr>
             <tr>
               <td ><em>gen</em> &rarr; <em>und</em></td>
-              <td>22.9%</td>
-              <td>37.7%</td>
-              <td>21.4%</td>
-              <td>28.9%</td>
-              <td><strong>27.6%</strong></td>
-              <td><strong>25.9%</strong></td>
+              <td>22.90%</td>
+              <td>37.70%</td>
+              <td>21.40%</td>
+              <td>28.90%</td>
+              <td><strong>27.60%</strong></td>
+              <td><strong>25.90%</strong></td>
             </tr>
           </tbody>
         </table>
+        </div>
       </div>
       <p class="cap">
         Transfer strength = &Delta;(transfer) / &Delta;(direct training).
