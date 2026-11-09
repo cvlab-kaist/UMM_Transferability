@@ -1,3 +1,23 @@
+# StyleSeed — Design Lock
+
+<!-- Project-specific decisions. Keep this lock aligned with the UI. -->
+- App domain:        academic research project page
+- Surface:           desktop web
+- Mood:              soft · minimal · airy · calm
+- Skin:              custom
+- Key color (accent): #5945B2
+- Font:              Manrope / Pretendard Variable
+- Radius personality: soft
+- Elevation:         light · purple-tinted layered shadows at 5–7% opacity
+- Motion seed:       Silk
+- Type scale:        desktop (body 16px or larger)
+- Density:           comfortable · 8px rhythm
+- Imagery palette:   published poster and figure colors are content, not UI accents
+- Semantic resolve:  green/red are reserved for numeric improvement/regression states
+- Locked:            2026-09-08
+
+---
+
 # StyleSeed — Full Context
 
 Source: github.com/bitjaru/styleseed (CLAUDE.md + DESIGN-LANGUAGE.md + VISUAL-CRAFT.md + UX-WRITING.md)

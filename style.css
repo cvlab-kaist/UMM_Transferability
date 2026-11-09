@@ -1,15 +1,16 @@
 /* =============================================================================
    UMM Transferability — Project Page Stylesheet
-   StyleSeed-compliant: one accent (muted slate-blue), one radius personality (soft),
+   StyleSeed-compliant: one accent (poster purple), one radius personality (soft),
    one shadow language (<=8%), one motion seed (Silk). Responsive from 320px up.
    ============================================================================= */
 
 /* ---------- Theme tokens ---------- */
 :root{
   /* Brand — single accent, tints only (no 2nd/3rd hue) */
-  --accent:        #3D5A80;   /* ink slate-blue — links, active nav, .hl */
-  --accent-strong: #2E4763;   /* darker slate — hover / emphasis text */
-  --accent-soft:   #EEF1F6;   /* cool-grey tint for highlights */
+  --accent:        #5945B2;   /* poster purple — links, active nav, .hl */
+  --accent-strong: #402AA1;   /* darker purple — hover / emphasis text */
+  --accent-soft:   #E9E7F9;   /* restrained purple tint for highlights */
+  --on-accent:     #FFFFFF;
 
   /* Status — severity only; normal states stay grey */
   --success: #2E7D50;         /* confirmation (copy) */
@@ -24,20 +25,27 @@
   --motion:     var(--dur-normal) var(--ease);
 
   /* Neutrals (no pure #000; darkest text = #1B1D23) */
-  --bg:          #FCFCFD;     /* page background (neutral near-white) */
+  --bg:          #FBFAFE;     /* page background (purple-tinted near-white) */
   --surface:     #FFFFFF;     /* cards / inset blocks */
   --surface-muted: #F0F0F2;   /* comparison rows */
-  --surface-2:   #F4F5F7;     /* second-level inset */
+  --surface-2:   #F7F7FD;     /* second-level inset */
+  --media-bg:    #FFFFFF;     /* published figures remain on white */
   --text:        #1B1D23;     /* strong */
-  --text-soft:   #565A66;     /* body / labels */
-  --text-mute:   #6A6E7A;     /* captions (darkened for WCAG AA on near-white) */
-  --border:      #E3E5EA;
-  --border-soft: #EEF0F3;
+  --text-soft:   #56536A;     /* body / labels */
+  --text-mute:   #6B6878;     /* captions (WCAG AA on near-white) */
+  --border:      #E2DFEE;
+  --border-soft: #EFEDF6;
+
+  /* Overlay — purple-black neutrals, isolated from the page surfaces */
+  --overlay-bg:      rgba(15, 10, 32, 0.92);
+  --overlay-control: rgba(27, 19, 57, 0.72);
+  --overlay-border:  rgba(255, 255, 255, 0.25);
+  --overlay-shadow:  rgba(10, 6, 28, 0.50);
 
   /* Typography */
-  --font:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font:        'Pretendard Variable', system-ui, sans-serif;
   --font-serif:  'Source Serif 4', 'Source Serif Pro', Georgia, serif;
-  --font-display:'Manrope', 'Inter', -apple-system, sans-serif;
+  --font-display:'Manrope', 'Pretendard Variable', system-ui, sans-serif;
   --font-mono:   'JetBrains Mono', monospace;
 
   /* Layout */
@@ -55,8 +63,9 @@
   --radius-lg: 14px;   /* cards */
 
   /* Shadows — one language, <=8% opacity */
-  --shadow-1: 0 4px 18px rgba(20, 24, 40, 0.05);
-  --shadow-2: 0 12px 40px rgba(24, 28, 48, 0.07);
+  --shadow-control: 0 1px 2px rgba(64, 42, 161, 0.05);
+  --shadow-1: 0 4px 18px rgba(64, 42, 161, 0.05);
+  --shadow-2: 0 12px 40px rgba(64, 42, 161, 0.07);
 }
 
 /* ---------- Base ---------- */
@@ -115,7 +124,7 @@ code{
   display:inline-flex; align-items:center; justify-content:center;
   min-width:34px; height:34px; padding:0 9px; border-radius:var(--radius);
   background:var(--accent);
-  color:#fff; font-weight:800; font-size:0.82rem; letter-spacing:0.03em;
+  color:var(--on-accent); font-weight:800; font-size:0.82rem; letter-spacing:0.03em;
   box-shadow:var(--shadow-1);
 }
 .brand-name{ font-weight:700; font-size:1rem; letter-spacing:-0.01em; }
@@ -232,7 +241,7 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
   background:var(--surface); color:var(--text);
   border:1px solid var(--border); border-radius:var(--radius);
   font-weight:500; font-size:0.92rem; text-decoration:none;
-  box-shadow:0 1px 2px rgba(0,0,0,0.03);
+  box-shadow:var(--shadow-control);
   transition:background-color var(--motion), border-color var(--motion),
              color var(--motion), transform var(--motion), box-shadow var(--motion);
 }
@@ -242,6 +251,19 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 }
 .link-btn svg{ width:16px; height:16px; stroke:currentColor; }
 .link-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+/* Poster narrative — one failure panel followed by the two-panel transfer path. */
+.poster-intro{ margin:32px auto 24px; }
+.poster-intro-grid{
+  display:grid; grid-template-columns:minmax(0, 1fr) minmax(0, 2fr);
+  align-items:start; gap:16px; padding:16px;
+  background:var(--media-bg);
+}
+.poster-intro-panel{ min-width:0; background:var(--media-bg); }
+.poster-intro .poster-intro-panel img{
+  display:block; width:100%; height:auto; object-fit:contain; background:var(--media-bg);
+}
+.poster-intro figcaption strong{ color:var(--accent-strong); }
 
 /* Promoted motivation lead — readable body size (replaces caption-grey hero-gap) */
 .hero-lead{
@@ -279,14 +301,14 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
   flex:0 0 auto;
   display:inline-flex; align-items:center; justify-content:center;
   width:18px; height:18px; border-radius:50%;
-  background:var(--accent); color:#fff;
+  background:var(--accent); color:var(--on-accent);
   font-family:var(--font-display); font-weight:800; font-size:0.68rem;
 }
 
 /* =============== HERO QUALITATIVE CAROUSEL =============== */
 /* Framed like the figure cards (one radius / shadow language). The source PNGs are
    alpha-transparent, so the media well composites on white — same convention as
-   every other figure on the page (.figure-wide/.figure-medium img{ background:#fff }). */
+   every other figure on the page (.figure-wide/.figure-medium images use --media-bg). */
 .hero-carousel{
   max-width:var(--hero-wide-w); margin:26px auto 8px;
   background:var(--surface);
@@ -295,7 +317,7 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 }
 .carousel-window{
   position:relative; aspect-ratio:2 / 1;
-  background:#fff; overflow:hidden;
+  background:var(--media-bg); overflow:hidden;
 }
 .carousel-slide{
   position:absolute; inset:0;
@@ -320,7 +342,7 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 .carousel-next{ right:12px; }
 .carousel-arrow svg{ width:20px; height:20px; }
 .carousel-arrow:hover{
-  background:var(--accent); border-color:var(--accent-strong); color:#fff;
+  background:var(--accent); border-color:var(--accent-strong); color:var(--on-accent);
 }
 .carousel-arrow:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
@@ -339,10 +361,9 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 }
 .carousel-cap.is-active{ opacity:1; pointer-events:auto; }
 .carousel-cap strong{ color:var(--text); }
-/* Mirror the figure's on-image labels so caption ↔ image map at a glance
-   (reuses the existing severity tokens; no new hues) */
-.cap-und{ color:var(--up);   font-weight:700; }
-.cap-gen{ color:var(--down); font-weight:700; }
+/* Caption emphasis is decorative, not status: use the one accent plus neutral text. */
+.cap-und{ color:var(--accent-strong); font-weight:700; }
+.cap-gen{ color:var(--text-soft); font-weight:700; }
 
 /* Dots */
 .carousel-dots{
@@ -423,7 +444,7 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
   transition:box-shadow var(--motion), transform var(--motion);
 }
 .figure-medium{ max-width:760px; margin-left:auto; margin-right:auto; }
-.figure-wide img, .figure-medium img{ display:block; width:100%; height:auto; background:#fff; }
+.figure-wide img, .figure-medium img{ display:block; width:100%; height:auto; background:var(--media-bg); }
 .figure-wide figcaption, .figure-medium figcaption{
   padding:14px 22px 18px;
   font-size:0.92rem; color:var(--text-soft);
@@ -453,7 +474,7 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 
 .lightbox-overlay{
   position:fixed; inset:0;
-  background:rgba(15, 14, 28, 0.92);
+  background:var(--overlay-bg);
   display:flex; align-items:center; justify-content:center;
   padding:4vh 4vw; z-index:10000;
   opacity:0; pointer-events:none;
@@ -466,8 +487,8 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
   display:block;
   max-width:100%; max-height:100%; width:auto; height:auto;
   object-fit:contain; border-radius:var(--radius);
-  box-shadow:0 24px 80px rgba(0, 0, 0, 0.5);
-  background:#fff; cursor:default;
+  box-shadow:0 24px 80px var(--overlay-shadow);
+  background:var(--media-bg); cursor:default;
   animation:lbZoomIn var(--dur-normal) var(--ease) both;
 }
 .lightbox-overlay--table{
@@ -482,14 +503,14 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 .lightbox-close{
   position:absolute; top:18px; right:22px;
   width:44px; height:44px; border-radius:50%;
-  border:1px solid rgba(255, 255, 255, 0.25);
-  background:rgba(20, 18, 36, 0.7);
-  color:#fff; font-size:1.6rem; line-height:1; font-weight:400;
+  border:1px solid var(--overlay-border);
+  background:var(--overlay-control);
+  color:var(--on-accent); font-size:1.6rem; line-height:1; font-weight:400;
   cursor:pointer;
   transition:background-color var(--motion), border-color var(--motion), transform var(--motion);
 }
 .lightbox-close:hover{ background:var(--accent); border-color:var(--accent-strong); transform:scale(1.05); }
-.lightbox-close:focus-visible{ outline:2px solid #fff; outline-offset:2px; }
+.lightbox-close:focus-visible{ outline:2px solid var(--on-accent); outline-offset:2px; }
 
 /* =============== TABLE =============== */
 .table-wrap{
@@ -611,8 +632,8 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
   padding:7px 14px; font-size:0.78rem; font-weight:600; cursor:pointer;
   transition:background-color var(--motion), color var(--motion), border-color var(--motion);
 }
-.copy-btn:hover{ background:var(--accent); color:#fff; border-color:var(--accent); }
-.copy-btn.copied{ background:var(--success); color:#fff; border-color:var(--success); }
+.copy-btn:hover{ background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+.copy-btn.copied{ background:var(--success); color:var(--on-accent); border-color:var(--success); }
 .copy-btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
 
 /* =============== FOOTER =============== */
@@ -676,6 +697,8 @@ a.author-name:hover{ color:var(--accent); text-decoration:underline; text-underl
 
   .link-btn{ min-height:44px; }
   .copy-btn{ min-height:44px; padding:10px 16px; }
+
+  .poster-intro-grid{ grid-template-columns:1fr; gap:16px; }
 
   /* Carousel controls → ≥44px touch targets */
   .carousel-arrow{ width:44px; height:44px; }

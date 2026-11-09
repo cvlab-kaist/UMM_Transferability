@@ -8,7 +8,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 
@@ -93,16 +94,34 @@
         </div>
       </div>
 
+      <figure class="figure-wide poster-intro" aria-labelledby="poster-intro-caption">
+        <div class="poster-intro-grid">
+          <div class="poster-intro-panel poster-intro-panel--failure">
+            <img src="assets/poster_intro_generation.png"
+                 alt="A Unified Multimodal Model tries to generate exactly four bottles but draws only two, illustrating a counting failure in image generation">
+          </div>
+          <div class="poster-intro-panel poster-intro-panel--transfer">
+            <img src="assets/poster_intro_transfer.png"
+                 alt="The model learns counting from four apples in an understanding task, then transfers that knowledge to generate exactly four bottles">
+          </div>
+        </div>
+        <figcaption id="poster-intro-caption">
+          <strong> Illustration of transferability. </strong>
 
+          A Unified Multimodal Model (UMM) first struggles to generate exactly four bottles (left). After learning counting from an understanding task (middle), it transfers that knowledge to generate exactly four bottles (right).
+          <!-- The model first struggles to generate an exact count. Learning the same capability through
+          <strong>understanding</strong> lets it transfer that knowledge to <strong>generation</strong>. -->
+          <!-- We investigate whether knowledge transfers between tasks (understanding and generation), defining transferability as improvement in one task from training the same capability only in the other task. -->
+        </figcaption>
+      </figure>
 
       <!-- Promoted motivation lead — motivation + gap, ending by naming the concept
            so the teaser figure below has a defined term ("transfer") to reference -->
       <p class="hero-lead">
         Prior UMM studies generally report that scaling up image understanding training benefits
-        generation benchmarks &mdash; and vice versa. But an aggregate benchmark score does not
-        tell us whether a <em>specific capability</em> &mdash; like
-        <strong class="hl">counting</strong> &mdash; is actually <em>shared</em> between
-        the two. So we probe it directly: we train a capability on just
+        generation benchmarks and vice versa. But an simple aggregate benchmark score does not
+        tell us whether a  <strong class="hl"><em>specific capability</em> </strong>  (e.g., counting) is actually shared between
+        the two. So we probe it directly: Train a capability on just
         <strong>one task</strong> (understanding or generation) and test whether it
         improves on the <strong>other task</strong>, without ever training it there. We call
         this <strong class="hl">transferability</strong>.
