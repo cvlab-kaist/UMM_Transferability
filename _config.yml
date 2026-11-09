@@ -1,0 +1,4 @@
+# Preserve original images in Git; publish only the web-sized copies.
+exclude:
+  - assets/poster_intro_generation.png
+  - assets/poster_intro_transfer.png
